@@ -34,6 +34,8 @@ int	main()
 	else
 	{
 		SDL_UpdateWindowSurface(window);
+		screenSurface = SDL_GetWindowSurface(window);
+		SDL_FillRect(screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0xFF, 0xFF, 0xFF ));
 	}
 	int is_running = 1;
 	SDL_Event event;
@@ -43,8 +45,6 @@ int	main()
 				is_running = 0;
 			}
 		}
-		screenSurface = SDL_GetWindowSurface(window);
-		SDL_FillRect(screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0xFF, 0xFF, 0xFF ));
 		SDL_Delay(16);
 	}
 	SDL_DestroyWindow(window);

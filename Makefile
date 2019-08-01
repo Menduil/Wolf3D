@@ -23,7 +23,7 @@ LIB = -L. libft/libft.a
 
 CC = gcc
 
-SDL2 = -I /Library/Frameworks/SDL2.framework/Versions/A/Headers -F /Library/Frameworks/ -framework SDL2
+SDL2 = -I include -L lib -l SDL2-2.0.0
 
 all : $(NAME)
 

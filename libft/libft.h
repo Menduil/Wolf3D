@@ -14,8 +14,6 @@
 #ifndef FDF_LIBFT_H
 # define FDF_LIBFT_H
 
-# include <SDL2/SDL.h>
-
 # include "../includes/wolf3d.h"
 
 void	ft_puterror(char *str);

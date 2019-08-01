@@ -14,8 +14,8 @@
 #ifndef WOLF3D_WOLF3D_H
 # define WOLF3D_WOLF3D_H
 
-#include <unistd.h>
-
+# include <unistd.h>
+# include "sdl2/SDL.h"
 # include "../libft/libft.h"
 
 #endif
