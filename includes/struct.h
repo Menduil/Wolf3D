@@ -1,31 +1,41 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   libft.h                                          .::    .:/ .      .::   */
+/*   struct.h                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: brey-gal <brey-gal@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/06/20 19:01:20 by brey-gal     #+#   ##    ##    #+#       */
-/*   Updated: 2019/06/20 19:01:20 by brey-gal    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/08/04 13:56:01 by brey-gal     #+#   ##    ##    #+#       */
+/*   Updated: 2019/08/04 13:56:01 by brey-gal    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef FDF_LIBFT_H
-# define FDF_LIBFT_H
+#ifndef WOLF3D_STRUCT_H
+# define WOLF3D_STRUCT_H
 
-# include "../includes/wolf3d.h"
+# include "sdl2/SDL.h"
 
-void		ft_puterror(char *str);
-void		ft_putstr(char *str);
-char		*ft_strnew(size_t size);
-char		*ft_strcpy(char *dst, const char *src);
-char		*ft_strjoin(char const *s1, char const *s2);
-char		*ft_strsub(char const *s, unsigned int start, size_t len);
-size_t		ft_strlen(const char *s);
-char		*ft_strdup(const char *s);
-int			ft_atoi(char const *str);
-char		*ft_itoa(int n);
+typedef struct  s_map_line
+{
+	int		nbl;
+	char	*line;
+	void	*next;
+}				t_map_line;
 
+typedef struct  s_map
+{
+	int		**map;
+	int		width;
+	int		height;
+}				t_map;
+
+typedef struct s_env
+{
+	SDL_Window *win;
+	SDL_Event	e;
+	t_map		map;
+	int			quit;
+}				t_env;
 
 #endif

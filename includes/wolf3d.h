@@ -15,24 +15,15 @@
 # define WOLF3D_WOLF3D_H
 
 # include <unistd.h>
-# include "sdl2/SDL.h"
+# include <fcntl.h>
+# include "struct.h"
 # include "../libft/libft.h"
 
-typedef struct  s_map
-{
-	int		**map;
-	int		width;
-	int		height;
-}				t_map;
-
-typedef struct s_env
-{
-	SDL_Window *win;
-	SDL_Event	e;
-	t_map		map;
-	int			quit;
-}				t_env;
+# define BUFF_SIZE 5000
 
 void	wolf(t_env *env);
+void    	map_line_next(t_map_line *map_line, char *str);
+t_map_line	*map_line_new(void);
+int			get_next_line(const int fd, char **line);
 
 #endif
