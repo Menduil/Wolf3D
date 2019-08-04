@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   wolf3d.h                                         .::    .:/ .      .::   */
+/*   struct.h                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: brey-gal <brey-gal@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: ebourgeo <ebourgeo@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/08/01 03:28:19 by brey-gal     #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/01 03:28:19 by brey-gal    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/08/02 16:26:34 by ebourgeo     #+#   ##    ##    #+#       */
+/*   Updated: 2019/08/02 16:26:34 by ebourgeo    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef WOLF3D_WOLF3D_H
-# define WOLF3D_WOLF3D_H
+#ifndef WOLF_3D_STRUCT_H
+# define WOLF_3D_STRUCT_H
 
-# include <unistd.h>
-# include "sdl2/SDL.h"
-# include "struct.h"
-# include "../libft/libft.h"
+typedef struct	s_env
+{
+	int		width;
+	int		height;
 
-
+}				t_env;
 
 #endif

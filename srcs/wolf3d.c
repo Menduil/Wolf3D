@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   wolf3d.h                                         .::    .:/ .      .::   */
+/*   wolf3d.c                                         .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: brey-gal <brey-gal@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: ebourgeo <ebourgeo@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/08/01 03:28:19 by brey-gal     #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/01 03:28:19 by brey-gal    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/08/04 12:32:11 by ebourgeo     #+#   ##    ##    #+#       */
+/*   Updated: 2019/08/04 12:32:11 by ebourgeo    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#ifndef WOLF3D_WOLF3D_H
-# define WOLF3D_WOLF3D_H
+#include "../includes/wolf3d.h"
 
-# include <unistd.h>
-# include "sdl2/SDL.h"
-# include "struct.h"
-# include "../libft/libft.h"
+void	wolf3d(t_env *env)
+{
 
-
-
-#endif
+	return ;
+}

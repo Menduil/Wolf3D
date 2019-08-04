@@ -19,32 +19,29 @@ int	main()
 {
 	SDL_Window	*window;
 	SDL_Surface	*screenSurface;
-
+	int is_running = 1;
+	SDL_Event event;
+	t_env env;
+	env.height = 1000;
+	env.width = 1000;
 	if(SDL_Init(SDL_INIT_VIDEO) != 0)
 	{
 		SDL_Log("ERREUR : Init SDL > %s\n", SDL_GetError());
 		exit(0);
 	}
 	if ((window = SDL_CreateWindow("Wolf3d",
-			0, 0, 100, 100, SDL_WINDOW_RESIZABLE)) == NULL)
+			0, 0, env.width, env.height, SDL_WINDOW_RESIZABLE)) == NULL)
 	{
 		SDL_Log("ERREUR : Creation fenetre echouee > %s\n", SDL_GetError());
 		exit(0);
 	}
-	else
-	{
-		SDL_UpdateWindowSurface(window);
-		screenSurface = SDL_GetWindowSurface(window);
-		SDL_FillRect(screenSurface, NULL, SDL_MapRGB( screenSurface->format, 0xFF, 0xFF, 0xFF ));
-	}
-	int is_running = 1;
-	SDL_Event event;
 	while (is_running == 1) {
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_QUIT) {
 				is_running = 0;
 			}
 		}
+		wolf3d(&env);
 		SDL_Delay(16);
 	}
 	SDL_DestroyWindow(window);

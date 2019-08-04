@@ -13,15 +13,14 @@
 
 NAME = wolf3d
 
-SRCS =  srcs/main.c
+SRCS =  srcs/main.c		\
+		srcs/wolf3d.c
 
 OBJS = $(SRCS:.c=.o)
 
-CFlAGS = -Wall -Werror -Wextra
-
 LIB = -L. libft/libft.a
 
-CC = gcc
+CC = gcc -Wall -Werror -Wextra
 
 SDL2 = -I include -L lib -l SDL2-2.0.0
 
