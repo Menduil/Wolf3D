@@ -5,8 +5,8 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: ebourgeo <ebourgeo@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/08/02 16:26:34 by ebourgeo     #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/02 16:26:34 by ebourgeo    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/08/06 16:32:52 by ebourgeo     #+#   ##    ##    #+#       */
+/*   Updated: 2019/08/06 16:32:52 by ebourgeo    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,6 +19,13 @@ typedef struct	s_pt
 	int	x;
 	int	y;
 }				t_pt;
+
+typedef struct  s_map_line
+{
+	int		nbl;
+	char	*line;
+	void	*next;
+}				t_map_line;
 
 typedef struct  s_map
 {
@@ -51,7 +58,6 @@ typedef struct s_env
 	int				cos_t[360];
 	int				sin_t[360];
 	int				ray_nb;
-
 }				t_env;
 
 #endif

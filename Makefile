@@ -15,7 +15,9 @@ NAME = wolf3d
 
 SRCS =  srcs/main.c		\
 		srcs/wolf.c		\
-		srcs/ray.c
+		srcs/ray.c		\
+		srcs/get_next_line.c	\
+		srcs/map_line.c
 
 OBJS = $(SRCS:.c=.o)
 
