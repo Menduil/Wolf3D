@@ -14,7 +14,8 @@
 NAME = wolf3d
 
 SRCS =  srcs/main.c		\
-		srcs/wolf3d.c
+		srcs/wolf.c		\
+		srcs/ray.c
 
 OBJS = $(SRCS:.c=.o)
 

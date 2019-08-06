@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   wolf3d.c                                         .::    .:/ .      .::   */
+/*   wolf.c                                           .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: ebourgeo <ebourgeo@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: brey-gal <brey-gal@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/08/04 12:32:11 by ebourgeo     #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/04 12:32:11 by ebourgeo    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/08/02 12:56:58 by brey-gal     #+#   ##    ##    #+#       */
+/*   Updated: 2019/08/02 12:56:58 by brey-gal    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-void	wolf3d(t_env *env)
+void	wolf(t_env *env)
 {
-
-	return ;
+	while (!env->quit)
+	{
+		while (SDL_PollEvent(&env->e) != 0)
+			if (env->e.type == SDL_QUIT || env->e.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
+				env->quit = 1;
+	}
+	setup(env);
+	render(env);
 }

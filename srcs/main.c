@@ -15,36 +15,39 @@
 
 #include <stdio.h>
 
-int	main()
+//void	get_map(char *av)
+//{
+//
+//}
+
+void	init(t_env *env)
 {
-	SDL_Window	*window;
-	SDL_Surface	*screenSurface;
-	int is_running = 1;
-	SDL_Event event;
-	t_env env;
-	env.height = 1000;
-	env.width = 1000;
 	if(SDL_Init(SDL_INIT_VIDEO) != 0)
 	{
 		SDL_Log("ERREUR : Init SDL > %s\n", SDL_GetError());
 		exit(0);
 	}
-	if ((window = SDL_CreateWindow("Wolf3d",
-			0, 0, env.width, env.height, SDL_WINDOW_RESIZABLE)) == NULL)
+	if ((env->win = SDL_CreateWindow("Wolf3d",
+			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+			800, 600, SDL_WINDOW_RESIZABLE)) == NULL)
 	{
 		SDL_Log("ERREUR : Creation fenetre echouee > %s\n", SDL_GetError());
 		exit(0);
 	}
-	while (is_running == 1) {
-		while (SDL_PollEvent(&event)) {
-			if (event.type == SDL_QUIT) {
-				is_running = 0;
-			}
-		}
-		wolf3d(&env);
-		SDL_Delay(16);
-	}
-	SDL_DestroyWindow(window);
+	env->quit = 0;
+}
+
+int		main(int ac, char **av)
+{
+	t_env	env;
+
+	ac = 0;
+	(void)av;
+//	if (ac == 2)
+//		get_map(avp[1]);
+	init(&env);
+	wolf(&env);
+	SDL_DestroyWindow(env.win);
 	SDL_Quit();
 	return (0);
 }
