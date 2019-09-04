@@ -18,9 +18,13 @@ void	wolf(t_env *env)
 	while (!env->quit)
 	{
 		while (SDL_PollEvent(&env->e) != 0)
+		{
 			if (env->e.type == SDL_QUIT || env->e.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
 				env->quit = 1;
+			if (env->e.key.keysym.scancode == SDL_SCANCODE_A)
+				env->turn = 1;
+			if (env->e.key.keysym.scancode == SDL_SCANCODE_D)
+				env->turn = -1;
+		}
 	}
-	setup(env);
-	render(env);
 }

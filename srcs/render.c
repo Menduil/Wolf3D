@@ -5,62 +5,79 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: ebourgeo <ebourgeo@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/08/04 12:43:11 by ebourgeo     #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/04 12:43:11 by ebourgeo    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/08/30 17:00:04 by ebourgeo     #+#   ##    ##    #+#       */
+/*   Updated: 2019/08/30 17:00:04 by ebourgeo    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-void	draw_line(t_env *env, float dist)
+float	d_to_r(float x)
 {
-	float height;
+	return(PI * x / 180);
+}
+
+void	draw_slice(t_env *env, float dist)
+{
+	int p_height;
 	int i;
 
-	SDL_SetRenderDrawColor(env->render, 255, 0, 0, 255);
-	height = (SIZE / dist) * env->sdist;
-	i = (env->height / 2) - (height / 2)
-	while (i < (env->height / 2) + (height /2))
+	p_height = SIZE / dist * env->sdist;
+	i = (env->height / 2) - (p_height / 2);
+	while (i < (env->height / 2) + (p_height / 2))
 	{
 		SDL_RenderDrawPoint(env->render, env->ray_nb, i);
 		i++;
 	}
+
+}
+
+void	calc_dist(t_env *env, t_player *p, t_pt *ph, t_pt *pv)
+{
+	float	disth;
+	float	distv;
+
+	disth = abs(p->xpos - ph->x) * env->cos_t[(int)(d_to_r(p->alpha))]
+			+ abs(p->ypos - ph->y) * env->sin_t[(int)(d_to_r(p->alpha))];
+	distv = abs(p->xpos - pv->x) * env->cos_t[(int)(d_to_r(p->alpha))]
+			+ abs(p->ypos - pv->y) * env->sin_t[(int)(d_to_r(p->alpha))];
+//	if (disth > distv)
+//		draw_slice(env, distv);
+//	else
+//		draw_slice(env, disth);
+	draw_slice(env, disth);
 }
 
 void	cast_ray(t_env *env, t_player *p)
 {
-	t_pt dh;
-	t_pt dv;
-	t_pt a;
-	t_pt b;
-	float dist;
-	float dist2;
+	t_pt	dv;
+	t_pt	dh;
+	t_pt	pv;
+	t_pt	ph;
 
-	horizontal_init(env, p, &a, &dh);
-	vertical_init(env, p, &b, &dv);
-	while (env->hit != 1)
-	{
-		horizontal_ray(env, p, &a, &dh)
-		vertical_ray(env, p, &b, &dv);
-	}
-	dist = abs(p.xpos - a.x) / env->cos_t[p->alpha];
-	dist2 = abs(p.xpos - b.x) / env->cos_t[p->alpha];
-	if (dist > dist2)
-		draw_line(env, dist2);
-	else
-		draw_line(env, dist);
-	env->hit = 0;
+	init_horizontal(env, p, &dh, &ph);
+	init_vertical(env, p, &dv, &pv);
+	while (env->hhit == 0)
+		horizontal_ray(env, &ph, &dh);
+	while (env->vhit == 0)
+		vertical_ray(env, &pv, &dv);
+	calc_dist(env, p, &ph, &pv);
+	env->vhit = 0;
+	env->hhit = 0;
 }
 
-void	render(t_env *env)
+void	render(t_env *env, t_player *p)
 {
-	t_player p;
-
+	env->r_angle = p->alpha - (env->fov / 2);
 	env->ray_nb = 0;
+	env->p_dist = SIZE / env->sdist;
+//	cast_ray(env, p);
 	while(env->ray_nb < env->width)
 	{
-		cast_ray(env, &p);
+		printf("NB %d, alpha = %f\n", env->ray_nb, p->alpha), fflush(stdout);
+		cast_ray(env, p);
+		env->r_angle += env->r_inc;
 		env->ray_nb++;
 	}
 }

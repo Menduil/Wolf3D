@@ -18,20 +18,23 @@
 # include <fcntl.h>
 # include <math.h>
 # include "sdl2/SDL.h"
+# include <stdio.h>
 # include "struct.h"
 # include "../libft/libft.h"
 # define SIZE 64
 # define BUFF_SIZE 5000
+# define PI 3.1415926535
 
 void		wolf(t_env *env);
-void		render(t_env *env);
+void		render(t_env *env, t_player *p);
 void		setup(t_env *env);
-void		vertical_ray(t_env *env, t_pt *b, t_pt *d);
-void		horizontal_ray(t_env *env, t_pt *a, t_pt *d);
-void		vertical_init(t_env *env, t_player *p, t_pt *b, t_pt *d);
-void		horizontal_init(t_env *env, t_player *p, t_pt *b, t_pt *d);
+void		vertical_ray(t_env *env, t_pt *pv, t_pt *dv);
+void		horizontal_ray(t_env *env, t_pt *ph, t_pt *dh);
+void		init_vertical(t_env *env, t_player *p, t_pt *dv, t_pt *pv);
+void		init_horizontal(t_env *env, t_player *p, t_pt *dh, t_pt *ph);
 void    	map_line_next(t_map_line *map_line, char *str);
 t_map_line	*map_line_new(void);
 int			get_next_line(const int fd, char **line);
+float		d_to_r(float x);
 
 #endif

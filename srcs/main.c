@@ -13,8 +13,6 @@
 
 #include "../includes/wolf3d.h"
 
-#include <stdio.h>
-
 int             get_nb(char *line)
 {
 	int i;
@@ -122,36 +120,26 @@ void	init(t_env *env)
 	}
 	if ((env->win = SDL_CreateWindow("Wolf3d",
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-			800, 600, SDL_WINDOW_RESIZABLE)) == NULL)
+			1000, 1000, SDL_WINDOW_RESIZABLE)) == NULL)
 	{
 		SDL_Log("ERREUR : Creation fenetre echouee > %s\n", SDL_GetError());
 		exit(0);
 	}
+	setup(env);
 	env->quit = 0;
 }
 
 int		main(int ac, char **av)
 {
 	t_env	env;
-	int i;
-	int y;
 
-	i = 0;
 	if (ac == 2)
 		get_map(av[1], &env.map);
-	while (i < env.map.height)
-	{
-		y = 0;
-		while (y < env.map.width)
-		{
-			printf("%i ",env.map.map[i][y]);
-			y++;
-		}
-		printf("\n");
-		i++;
-	}
 	init(&env);
+	render(&env, &env.p);
+	SDL_RenderPresent(env.render);
 	wolf(&env);
+	SDL_DestroyRenderer(env.render);
 	SDL_DestroyWindow(env.win);
 	SDL_Quit();
 	return (0);

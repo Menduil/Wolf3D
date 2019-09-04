@@ -44,6 +44,7 @@ typedef	struct	s_player
 
 typedef struct s_env
 {
+	t_player		p;
 	int				width;
 	int				height;
 	SDL_Window		*win;
@@ -51,13 +52,17 @@ typedef struct s_env
 	SDL_Renderer	*render;
 	t_map			map;
 	int				quit;
+	int				turn;
 	int				fov;
 	float			sdist;
-	int				hit;
-	float			rangle;
-	int				cos_t[360];
-	int				sin_t[360];
+	int				vhit;
+	int				hhit;
+	float			r_angle;
+	float			r_inc;
+	float			cos_t[360];
+	float			sin_t[360];
 	int				ray_nb;
+	float			p_dist;
 }				t_env;
 
 #endif

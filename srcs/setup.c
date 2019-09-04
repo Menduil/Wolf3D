@@ -20,20 +20,37 @@ void	angle_table(t_env *env)
 	i = 0;
 	while (i < 360)
 	{
-		env->sin_t[i] = sin(i);
-		env->cos_t[i] = cos(i);
+		env->cos_t[i] = cos(i * PI / 180);
+		i++;
+	}
+
+	while (i < 360)
+	{
+		env->sin_t[i] = sin(i * PI / 180);
 		i++;
 	}
 }
 
-void	setup(t_env *env);
+void	setup(t_env *env)
 {
+	t_player p;
+
+	env->p.xpos = 96;
+	env->p.ypos = 224;
+	env->p.alpha = 47;
+	env->p.height = 32;
 	env->fov = 60;
-	env->width = 800;
-	env->height = 600;
-	env->hit = 0;
-	env->sdist = (env->width / 2) / tan(env->fov / 2);
-	env->rangle = env->fov / env->width;
+	env->width = 1000;
+	env->height = 1000;
+	env->vhit = 0;
+	env->hhit = 0;
+	env->turn = 0;
+	env->sdist = (env->width / 2) / tan(d_to_r(env->fov / 2));
+	env->r_inc = (float)env->fov / (float)env->width;
+	env->r_angle = 0;
 	env->render = SDL_CreateRenderer(env->win, -1, 0);
+	SDL_SetRenderDrawColor(env->render, 0, 0, 0, 0);
+	SDL_RenderClear(env->render);
+	SDL_SetRenderDrawColor(env->render, 0, 255, 0, 255);
 	angle_table(env);
 }
