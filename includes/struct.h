@@ -16,8 +16,8 @@
 
 typedef struct	s_pt
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 }				t_pt;
 
 typedef struct  s_map_line
@@ -37,9 +37,10 @@ typedef struct  s_map
 typedef	struct	s_player
 {
 	int		height;
-	int		xpos;
-	int		ypos;
-	float	alpha;
+	float	xpos;
+	float	ypos;
+	int		alpha;
+	int		speed;
 }				t_player;
 
 typedef struct s_env
@@ -53,6 +54,9 @@ typedef struct s_env
 	t_map			map;
 	int				quit;
 	int				turn;
+	int				xmov;
+	int				ymov;
+	int				walk;
 	int				fov;
 	float			sdist;
 	int				vhit;
@@ -61,6 +65,7 @@ typedef struct s_env
 	float			r_inc;
 	float			cos_t[360];
 	float			sin_t[360];
+	float			tan_t[360];
 	int				ray_nb;
 	float			p_dist;
 }				t_env;

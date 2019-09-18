@@ -136,8 +136,6 @@ int		main(int ac, char **av)
 	if (ac == 2)
 		get_map(av[1], &env.map);
 	init(&env);
-	render(&env, &env.p);
-	SDL_RenderPresent(env.render);
 	wolf(&env);
 	SDL_DestroyRenderer(env.render);
 	SDL_DestroyWindow(env.win);

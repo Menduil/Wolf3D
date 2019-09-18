@@ -25,13 +25,16 @@ OBJS = $(SRCS:.c=.o)
 
 LIB = -L. libft/libft.a
 
+INC =	includes/struct.h	\
+		includes/wolf3d.h
+
 CC = gcc
 
 SDL2 = -I include -L lib -l SDL2-2.0.0
 
 all : $(NAME)
 
-$(NAME) : $(OBJS)
+$(NAME) : $(OBJS) $(INC)
 		$(MAKE) -C libft
 		$(CC) -o $(NAME) $(OBJS) $(LIB) $(SDL2)
 
