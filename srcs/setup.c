@@ -60,6 +60,7 @@ void	setup(t_env *env)
 	env->xmov = 0;
 	env->ymov = 0;
 	env->walk = 0;
+	env->map.width = 0;
 	env->sdist = (env->width / 2) / tan(d_to_r(env->fov / 2));
 	env->r_inc = (float)env->fov / (float)env->width;
 	env->r_angle = 0;

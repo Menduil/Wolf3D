@@ -59,8 +59,8 @@ void	calc_dist(t_env *env, t_player *p, t_pt *ph, t_pt *pv)
 		distv = sqrt((p->xpos - pv->x) * (p->xpos - pv->x) + (p->ypos - pv->y) * (p->ypos - pv->y));
 	else
 		distv = 99999;
-	printf("disth = %f, phx = %d, phy = %d\n", disth, ph->x, ph->y), fflush(stdout);
-	printf("distv = %f, pvx = %d, pvy = %d\n\n", distv, pv->x, pv->y), fflush(stdout);
+	//printf("disth = %f, phx = %d, phy = %d\n", disth, ph->x, ph->y), fflush(stdout);
+	//printf("distv = %f, pvx = %d, pvy = %d\n\n", distv, pv->x, pv->y), fflush(stdout);
 	if (disth > distv)
 		draw_slice(env, distv * env->cos_t[abs((int)env->r_angle - p->alpha)], 1);
 	else
@@ -112,7 +112,7 @@ void	render(t_env *env, t_player *p)
 		p->alpha = 359 + p->alpha;
 	else if (p->alpha > 359)
 		p->alpha = 0 - (360 - p->alpha);
-	printf("alpha %d, PX %f, PY %f \n", p->alpha, p->xpos, p->ypos),fflush(stdout);
+	//printf("alpha %d, PX %f, PY %f \n", p->alpha, p->xpos, p->ypos),fflush(stdout);
 	if (env->walk == 1)
 	{
 		p->xpos += env->cos_t[p->alpha] * p->speed;
