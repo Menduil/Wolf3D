@@ -59,10 +59,8 @@ typedef struct s_env
 	SDL_Renderer	*render;
 	t_map			map;
 	int				quit;
-	int				turn;
 	int				xmov;
 	int				ymov;
-	int				walk;
 	int				fov;
 	float			sdist;
 	int				vhit;
@@ -74,7 +72,6 @@ typedef struct s_env
 	float			tan_t[360];
 	int				ray_nb;
 	float			p_dist;
-	int				lastc;
 }				t_env;
 
 #endif

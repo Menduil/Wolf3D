@@ -1,6 +1,6 @@
 # sdl pkg-config source file
 
-prefix=/Users/brey-gal/.brew
+prefix=/Users/ebourgeo/.brew
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include

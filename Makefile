@@ -13,14 +13,16 @@
 
 NAME = wolf3d
 
-SRCS =  srcs/main.c		\
-		srcs/wolf.c		\
-		srcs/ray.c		\
+SRCS =  srcs/main.c				\
+		srcs/wolf.c				\
+		srcs/ray.c				\
 		srcs/get_next_line.c	\
-		srcs/map_line.c		\
-		srcs/render.c	\
-		srcs/setup.c	\
-		srcs/collision.c
+		srcs/map_line.c			\
+		srcs/render.c			\
+		srcs/setup.c			\
+		srcs/collision.c		\
+		srcs/control.c			\
+		srcs/tools.c
 
 OBJS = $(SRCS:.c=.o)
 
