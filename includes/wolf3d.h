@@ -23,7 +23,7 @@
 # include "../libft/libft.h"
 # define SIZE 64
 # define BUFF_SIZE 5000
-# define PI 3.1415926535
+# define PI 3.14159265359
 
 void		wolf(t_env *env);
 void		render(t_env *env, t_player *p);
@@ -36,5 +36,6 @@ void    	map_line_next(t_map_line *map_line, char *str);
 t_map_line	*map_line_new(void);
 int			get_next_line(const int fd, char **line);
 float		d_to_r(float x);
+void		check_walls(t_env *env, t_pt *a, int type);
 
 #endif

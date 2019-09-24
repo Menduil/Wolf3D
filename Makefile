@@ -19,7 +19,8 @@ SRCS =  srcs/main.c		\
 		srcs/get_next_line.c	\
 		srcs/map_line.c		\
 		srcs/render.c	\
-		srcs/setup.c
+		srcs/setup.c	\
+		srcs/collision.c
 
 OBJS = $(SRCS:.c=.o)
 

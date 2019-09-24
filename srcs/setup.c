@@ -46,14 +46,15 @@ void	setup(t_env *env)
 {
 	t_player p;
 
-	env->p.xpos = 64 * 4;
-	env->p.ypos = 64 * 2;
-	env->p.alpha = 135;
-	env->p.height = 32;
+	env->p.xpos = 222;
+	env->p.ypos = 221;
+	env->p.alpha = 164;
+	env->lastc = 0;
+	env->p.height = 52;
 	env->p.speed = 5;
-	env->fov = 90;
-	env->width = 1000;
-	env->height = 1000;
+	env->fov = 60;
+	env->width = 1200;
+	env->height = 1024;
 	env->vhit = 0;
 	env->hhit = 0;
 	env->turn = 0;

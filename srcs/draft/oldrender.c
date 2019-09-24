@@ -25,8 +25,8 @@ void	draw_line(t_env *env, float dist)
 
 	p_height = (SIZE / dist) * env->sdist;
 	i = (env->height / 2) - (p_height / 2);
-	//printf("NBD = %d | i = %d, height = %f\n", env->ray_nb, i, p_height), fflush(stdout);
-	//printf(" p_dist = %f, p_height = %f\n\n\n", env->p_dist, p_height), fflush(stdout);
+	////printf("NBD = %d | i = %d, height = %f\n", env->ray_nb, i, p_height), fflush(stdout);
+	////printf(" p_dist = %f, p_height = %f\n\n\n", env->p_dist, p_height), fflush(stdout);
 	while (i < (env->height / 2) + (p_height /2))
 	{
 		SDL_RenderDrawPoint(env->render, env->ray_nb, i);
