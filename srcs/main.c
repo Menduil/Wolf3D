@@ -74,6 +74,7 @@ void	map_convert(t_map_line *map_line, t_map *map)
 {
 	t_map_line		*nb_line;
 	int				i;
+	int				tmp;
 
 	nb_line = map_line;
 	while (nb_line->next != NULL)
@@ -85,13 +86,15 @@ void	map_convert(t_map_line *map_line, t_map *map)
 	map_line = map_line->next;
 	while (map_line->next != NULL)
 	{
+		tmp = get_nb(map_line->line);
+		if (map->width < tmp)
+			map->width = tmp;
 		map->map[i] = line_convert(map_line->line);
 		map_line = map_line->next;
 		i++;
 	}
-	map->width = get_nb(map_line->line);
 	map->map[i] = line_convert(map_line->line);
-
+	printf("%d\n",map->width);
 }
 
 void	get_map(char *av, t_map *map)

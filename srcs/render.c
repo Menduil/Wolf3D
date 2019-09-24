@@ -125,7 +125,7 @@ void	render(t_env *env, t_player *p)
 		p->alpha = 359 + p->alpha;
 	else if (p->alpha > 359)
 		p->alpha = 0 - (360 - p->alpha);
-	printf("alpha %d, PX %d, PY %d \n", p->alpha, p->xpos, p->ypos),fflush(stdout);
+	//printf("alpha %d, PX %f, PY %f \n", p->alpha, p->xpos, p->ypos),fflush(stdout);
 	if (env->walk == 1)
 	{
 		p->xpos += round(env->cos_t[p->alpha] * p->speed);
