@@ -13,12 +13,26 @@
 
 #include "../includes/wolf3d.h"
 
+void	draw_line(t_env *env, int y, int x, int p_height)
+{
+	SDL_Point point[p_height];
+	int i;
+
+	i = 0;
+	while (i < p_height)
+	{
+		point[i].x = x;
+		point[i].y = y;
+		y++;
+		i++;
+	}
+	SDL_RenderDrawPoints(env->render ,point , i);
+}
 void	draw_slice(t_env *env, float dist, int type)
 {
 	int p_height;
-	int i;
-
-	int tmp;
+	int ymax;
+	int y;
 
 	if (type == 0)
 	{
@@ -37,17 +51,8 @@ void	draw_slice(t_env *env, float dist, int type)
 	p_height = SIZE / dist * env->sdist;
 	if (p_height > env->height)
 		p_height = env->height;
-	i = (env->height / 2) - (p_height / 2);
-	tmp = (env->height / 2) + (p_height / 2);
-	while (i < tmp)
-	{
-		SDL_RenderDrawPoint(env->render, env->ray_nb, i);
-		i += 2;
-	}
-//	SDL_RenderDrawPoint(env->render, env->ray_nb, (env->height / 2) - (p_height / 2));
-//	SDL_RenderDrawPoint(env->render, env->ray_nb, (env->height / 2) + (p_height / 2));
-//	SDL_RenderDrawPoint(env->render, env->ray_nb, (env->height / 2));
-
+	y = (env->height / 2) - (p_height / 2);
+	draw_line(env, y, env->ray_nb, p_height);
 }
 
 void	calc_dist(t_env *env, t_player *p, t_pt *ph, t_pt *pv)
@@ -125,7 +130,7 @@ void	render(t_env *env, t_player *p)
 		p->alpha = 359 + p->alpha;
 	else if (p->alpha > 359)
 		p->alpha = 0 - (360 - p->alpha);
-	//printf("alpha %d, PX %f, PY %f \n", p->alpha, p->xpos, p->ypos),fflush(stdout);
+	//printf("alpha %d, PX %d, PY %d \n", p->alpha, p->xpos, p->ypos),fflush(stdout);
 	if (env->walk == 1)
 	{
 		p->xpos += round(env->cos_t[p->alpha] * p->speed);

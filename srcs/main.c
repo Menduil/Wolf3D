@@ -94,7 +94,6 @@ void	map_convert(t_map_line *map_line, t_map *map)
 		i++;
 	}
 	map->map[i] = line_convert(map_line->line);
-	printf("%d\n",map->width);
 }
 
 void	get_map(char *av, t_map *map)
@@ -138,6 +137,8 @@ int		main(int ac, char **av)
 
 	if (ac == 2)
 		get_map(av[1], &env.map);
+	else
+		get_map("test.map", &env.map);
 	init(&env);
 	wolf(&env);
 	SDL_DestroyRenderer(env.render);
