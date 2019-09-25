@@ -17,7 +17,6 @@ void	display(t_env *env)
 {
 	SDL_SetRenderDrawColor(env->render, 0, 0, 0, 0);
 	SDL_RenderClear(env->render);
-	SDL_SetRenderDrawColor(env->render, 0, 255, 0, 255);
 	render(env, &env->p);
 	SDL_RenderPresent(env->render);
 }
