@@ -94,10 +94,8 @@ void	render(t_env *env, t_player *p)
 {
 	env->ray_nb = 0;
 	env->p_dist = SIZE / env->sdist;
-
 	printf("alpha %d, PX %d, PY %d \n", p->alpha, p->xpos, p->ypos),fflush(stdout);
 	env->r_angle = angle_adjust(p->alpha + (env->fov / 2));
-
 //	cast_ray(env, p);
 	while(env->ray_nb < env->width)
 	{

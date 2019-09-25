@@ -28,11 +28,12 @@ void	wolf(t_env *env)
 	while (!env->quit)
 	{
 		const Uint8 *keystates = SDL_GetKeyboardState(NULL);
-		while (SDL_PollEvent(&env->e) != 0)
+		while (SDL_PollEvent(&env->e) != 0 || env->e.key.repeat != 0)
 		{
 			if (env->quit == 1)
 				break;
 			control(env, keystates);
+			texture(env);
 			display(env);
 		}
 	}

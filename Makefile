@@ -22,7 +22,8 @@ SRCS =  srcs/main.c				\
 		srcs/setup.c			\
 		srcs/collision.c		\
 		srcs/control.c			\
-		srcs/tools.c
+		srcs/tools.c			\
+		srcs/texture.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -39,7 +40,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJS) $(INC)
 		$(MAKE) -C libft
-		$(CC) -o $(NAME) $(OBJS) $(LIB) $(SDL2)
+		$(CC) -o $(NAME) -O3 $(OBJS) $(LIB) $(SDL2)
 
 clean :
 		$(MAKE) clean -C libft

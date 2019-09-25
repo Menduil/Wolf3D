@@ -17,15 +17,15 @@ void	strafe(t_env *env, const Uint8 *keystates)
 {
 	int alpha_s;
 	alpha_s = angle_adjust(env->p.alpha + 90);
-	if (keystates[SDL_SCANCODE_E])
-	{
-		env->p.xpos -= round(env->cos_t[alpha_s] * (env->p.speed / 2));
-		env->p.ypos += round(env->sin_t[alpha_s] * (env->p.speed / 2));
-	}
-	else if (keystates[SDL_SCANCODE_Q])
+	if (keystates[SDL_SCANCODE_Q])
 	{
 		env->p.xpos += round(env->cos_t[alpha_s] * (env->p.speed / 2));
 		env->p.ypos -= round(env->sin_t[alpha_s] * (env->p.speed / 2));
+	}
+	else if (keystates[SDL_SCANCODE_E])
+	{
+		env->p.xpos -= round(env->cos_t[alpha_s] * (env->p.speed / 2));
+		env->p.ypos += round(env->sin_t[alpha_s] * (env->p.speed / 2));
 	}
 }
 
