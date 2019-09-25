@@ -48,7 +48,7 @@ void	draw_slice(t_env *env, float dist, int type)
 		else
 			SDL_SetRenderDrawColor(env->render, 0, 79, 255, 255);
 	}
-	p_height = SIZE / dist * env->sdist;
+	p_height = trunc(SIZE / dist * env->sdist);
 	if (p_height > env->height)
 		p_height = env->height;
 	y = (env->height / 2) - (p_height / 2);
@@ -68,21 +68,13 @@ void	calc_dist(t_env *env, t_player *p, t_pt *ph, t_pt *pv)
 		distv = sqrt((p->xpos - pv->x) * (p->xpos - pv->x) + (p->ypos - pv->y) * (p->ypos - pv->y));
 	else
 		distv = 99999;
-//	printf("disth = %f, phx = %f, phy = %f\n", disth, ph->x, ph->y), fflush(stdout);
 //	printf("distv = %f, pvx = %f, pvy = %f\n\n", distv, pv->x, pv->y), fflush(stdout);
+//	printf("disth = %f, phx = %f, phy = %f\n", disth, ph->x, ph->y), fflush(stdout);
 
-	if (disth == distv)
-		draw_slice(env, distv * env->cos_t[abs((int)env->r_angle - p->alpha)], env->lastc);
-	else if (disth > distv)
-	{
-		env->lastc = 1;
+	if (disth > distv)
 		draw_slice(env, distv * env->cos_t[abs((int)env->r_angle - p->alpha)], 1);
-	}
 	else
-	{
-		env->lastc = 0;
 		draw_slice(env, disth * env->cos_t[abs((int)env->r_angle - p->alpha)], 0);
-	}
 }
 
 void	cast_ray(t_env *env, t_player *p)
@@ -103,60 +95,18 @@ void	cast_ray(t_env *env, t_player *p)
 	env->hhit = 0;
 }
 
-//void	SinCostest(t_env *env)
-//{
-//	int x = 0;
-//	while (x < 360)
-//	{
-//
-//		SDL_SetRenderDrawColor(env->render, 0, 255, 0, 255);
-//		SDL_RenderDrawPoint(env->render, x, env->cos_t[x] * 300 + env->height / 2);
-//		SDL_SetRenderDrawColor(env->render, 0, 0, 255, 255);
-//		SDL_RenderDrawPoint(env->render, x, env->sin_t[x] * 300 + env->height / 2);
-//		x++;
-//	}
-//}
-
 void	render(t_env *env, t_player *p)
 {
 	env->ray_nb = 0;
 	env->p_dist = SIZE / env->sdist;
 
-	if (env->turn == 1)
-		p->alpha += 2;
-	else if (env->turn == -1)
-		p->alpha -= 2;
-	if (p->alpha < 0)
-		p->alpha = 359 + p->alpha;
-	else if (p->alpha > 359)
-		p->alpha = 0 - (360 - p->alpha);
-	//printf("alpha %d, PX %d, PY %d \n", p->alpha, p->xpos, p->ypos),fflush(stdout);
-	if (env->walk == 1)
-	{
-		p->xpos += round(env->cos_t[p->alpha] * p->speed);
-		p->ypos -= round(env->sin_t[p->alpha] * p->speed);
-	}
-	else if (env->walk == -1)
-	{
-		p->xpos -= round(env->cos_t[p->alpha] * p->speed);
-		p->ypos += round(env->sin_t[p->alpha] * p->speed);
-	}
-	env->r_angle = p->alpha + (env->fov / 2);
-	if (env->r_angle < 0)
-		env->r_angle = 359 + env->r_angle;
-	else if (env->r_angle > 359)
-		env->r_angle = 0 - (360 - env->r_angle);
-
+	env->r_angle = angle_adjust(p->alpha + (env->fov / 2));
 //	cast_ray(env, p);
-//	SinCostest(env);
 	while(env->ray_nb < env->width)
 	{
 		cast_ray(env, p);
 		env->r_angle -= env->r_inc;
-		if (env->r_angle < 0)
-			env->r_angle = 359 + env->r_angle;
-		else if (env->r_angle > 359)
-			env->r_angle = 0 - (360 - env->r_angle);
+		env->r_angle = angle_adjust(env->r_angle);
 		env->ray_nb++;
 	}
 }

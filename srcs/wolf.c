@@ -13,7 +13,7 @@
 
 #include "../includes/wolf3d.h"
 
-void	opti(t_env *env)
+void	display(t_env *env)
 {
 	SDL_SetRenderDrawColor(env->render, 0, 0, 0, 0);
 	SDL_RenderClear(env->render);
@@ -23,28 +23,16 @@ void	opti(t_env *env)
 
 void	wolf(t_env *env)
 {
-	opti(env);
+	display(env);
 	while (!env->quit)
 	{
 		const Uint8 *keystates = SDL_GetKeyboardState(NULL);
-		while (SDL_PollEvent(&env->e) != 0 || env->e.key.repeat != 0)
+		while (SDL_PollEvent(&env->e) != 0)
 		{
-			if (env->e.type == SDL_QUIT || keystates[SDL_SCANCODE_ESCAPE])
-				env->quit = 1;
-			if (keystates[SDL_SCANCODE_A])
-				env->turn = 1;
-			else if (keystates[SDL_SCANCODE_D])
-				env->turn = -1;
-			else
-				env->turn = 0;
-			if (keystates[SDL_SCANCODE_W])
-				env->walk = 1;
-			else if (keystates[SDL_SCANCODE_S])
-				env->walk = -1;
-			else
-				env->walk = 0;
-			if (env->turn != 0 || env->walk != 0)
-				opti(env);
+			if (env->quit == 1)
+				break;
+			control(env, keystates);
+			display(env);
 		}
 	}
 }

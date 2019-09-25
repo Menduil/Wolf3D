@@ -27,12 +27,13 @@ void	check_walls(t_env *env, t_pt *a, int type)
 {
 	t_ptint b;
 
+
 //	printf("Type = %d\n", type), fflush(stdout);
 //	printf("a = %f / %f\n", a->x, a->y), fflush(stdout);
 	b = convert(a);
 //	printf("b = %d / %d\n\n", b.x, b.y), fflush(stdout);
 	if (b.x < 0 || b.y < 0
-		|| b.x > 7 || b.y > 11)
+		|| b.x > env->map.width - 1 || b.y > env->map.height - 1)
 	{
 		if (type < 2)
 			env->hhit = -1;

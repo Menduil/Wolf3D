@@ -13,11 +13,6 @@
 
 #include "../includes/wolf3d.h"
 
-float	d_to_r(float x)
-{
-	return(PI * x / 180);
-}
-
 void	angle_table(t_env *env)
 {
 	int i;
@@ -46,10 +41,9 @@ void	setup(t_env *env)
 {
 	t_player p;
 
-	env->p.xpos = 207;
-	env->p.ypos = 318;
-	env->p.alpha = 198;
-	env->lastc = 0;
+	env->p.xpos = 222;
+	env->p.ypos = 221;
+	env->p.alpha = 164;
 	env->p.height = 52;
 	env->p.speed = 5;
 	env->fov = 60;
@@ -57,11 +51,8 @@ void	setup(t_env *env)
 	env->height = 1024;
 	env->vhit = 0;
 	env->hhit = 0;
-	env->turn = 0;
 	env->xmov = 0;
 	env->ymov = 0;
-	env->walk = 0;
-	env->map.width = 0;
 	env->sdist = (env->width / 2) / tan(d_to_r(env->fov / 2));
 	env->r_inc = (float)env->fov / (float)env->width;
 	env->r_angle = 0;
