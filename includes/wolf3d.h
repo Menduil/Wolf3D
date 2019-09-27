@@ -39,5 +39,6 @@ float		d_to_r(float x);
 void		check_walls(t_env *env, t_pt *a, int type);
 void		control(t_env *env, const Uint8 *keystates);
 float		angle_adjust(float angle);
+void		map_line_del(t_map_line *map_line);
 
 #endif

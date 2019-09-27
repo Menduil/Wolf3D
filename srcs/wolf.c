@@ -23,7 +23,8 @@ void	display(t_env *env)
 
 void	wolf(t_env *env)
 {
-	const Uint8 *keystates;
+	const Uint8	*keystates;
+
 	display(env);
 	while (!env->quit)
 	{

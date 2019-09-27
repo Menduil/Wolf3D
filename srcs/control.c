@@ -19,6 +19,7 @@ void	strafe(t_env *env, const Uint8 *keystates)
 	alpha_s = angle_adjust(env->p.alpha + 90);
 	if (keystates[SDL_SCANCODE_E])
 	{
+		printf("sauce\n");
 		env->p.xpos -= round(env->cos_t[alpha_s] * (env->p.speed / 2));
 		env->p.ypos += round(env->sin_t[alpha_s] * (env->p.speed / 2));
 	}
@@ -49,8 +50,8 @@ void	control(t_env *env, const Uint8 *keystates)
 		env->p.ypos += round(env->sin_t[env->p.alpha] * env->p.speed);
 	}
 	if (keystates[SDL_SCANCODE_LSHIFT])
-		env->p.speed = 2;
+		env->p.speed = 10;
 	else
-		env->p.speed = 1;
+		env->p.speed = 5;
 	strafe(env, keystates);
 }
