@@ -15,10 +15,12 @@
 
 void	draw_line(t_env *env, int y, int x, int p_height)
 {
-	SDL_Point point[p_height];
+	SDL_Point *point;
 	int i;
 
 	i = 0;
+	if (!(point = (SDL_Point*)malloc(sizeof(SDL_Point) * p_height)))
+		return;
 	while (i < p_height)
 	{
 		point[i].x = x;
@@ -34,6 +36,11 @@ void	draw_slice(t_env *env, float dist, int type)
 	int ymax;
 	int y;
 
+	if (dist <= 0)
+	{
+		printf("%f\n", dist);
+		return;
+	}
 	if (type == 0)
 	{
 		if (env->r_angle > 0 && env->r_angle < 180)

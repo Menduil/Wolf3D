@@ -45,7 +45,7 @@ void	setup(t_env *env)
 	env->p.ypos = 221;
 	env->p.alpha = 164;
 	env->p.height = 52;
-	env->p.speed = 5;
+	env->p.speed = 1;
 	env->fov = 60;
 	env->width = 1200;
 	env->height = 1024;
