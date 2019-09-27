@@ -111,6 +111,7 @@ void	get_map(char *av, t_map *map)
 		free(line);
 	}
 	map_convert(map_line, map);
+	map_line_del(map_line);
 }
 
 void	init(t_env *env)

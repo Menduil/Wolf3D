@@ -40,5 +40,6 @@ void		check_walls(t_env *env, t_pt *a, int type);
 void		control(t_env *env, const Uint8 *keystates);
 float		angle_adjust(float angle);
 void		texture(t_env *env, int offset, int j);
+void		map_line_del(t_map_line *map_line);
 
 #endif

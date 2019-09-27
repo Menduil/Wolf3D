@@ -29,7 +29,8 @@ void	draw_line(t_env *env, int y, int x, int p_height, int offset)
 		y++;
 		i++;
 	}
-	SDL_RenderDrawPoints(env->render, point, i);
+	SDL_RenderDrawPoints(env->render ,point , i);
+	free(point);
 }
 void	draw_slice(t_env *env, float dist, int type, t_pt *pi)
 {
@@ -59,7 +60,8 @@ void	draw_slice(t_env *env, float dist, int type, t_pt *pi)
 	if (p_height > env->height)
 		p_height = env->height;
 	y = (env->height / 2) - (p_height / 2);
-//	draw_line(env, y, env->ray_nb, p_height, offset);
+	if ((env->ray_nb % 3) == 0)
+		draw_line(env, y, env->ray_nb, p_height, offset);
 }
 
 void	calc_dist(t_env *env, t_player *p, t_pt *ph, t_pt *pv)
@@ -90,13 +92,22 @@ void	cast_ray(t_env *env, t_player *p)
 	t_pt	dh;
 	t_pt	pv;
 	t_pt	ph;
+	int 	i;
 
+	i = 0;
 	init_horizontal(env, p, &dh, &ph);
 	init_vertical(env, p, &dv, &pv);
-	while (env->hhit == 0)
+	while (env->hhit == 0 && i < 500)
+	{
 		horizontal_ray(env, &ph, &dh);
-	while (env->vhit == 0)
+		i++;
+	}
+	i = 0;
+	while (env->vhit == 0 && i < 500)
+	{
 		vertical_ray(env, &pv, &dv);
+		i++;
+	}
 	calc_dist(env, p, &ph, &pv);
 	env->vhit = 0;
 	env->hhit = 0;

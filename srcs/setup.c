@@ -86,7 +86,7 @@ void	setup(t_env *env)
 	env->sdist = (env->width / 2) / tan(d_to_r(env->fov / 2));
 	env->r_inc = (float)env->fov / (float)env->width;
 	env->r_angle = 0;
-	env->render = SDL_CreateRenderer(env->win, -1, 0);
+	env->render = SDL_CreateRenderer(env->win, -1, SDL_RENDERER_PRESENTVSYNC);
 	SDL_SetRenderDrawColor(env->render, 0, 0, 0, 0);
 	SDL_RenderClear(env->render);
 	SDL_SetRenderDrawColor(env->render, 0, 255, 0, 255);
