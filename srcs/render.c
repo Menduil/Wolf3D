@@ -20,28 +20,15 @@ void	draw_line(t_env *env, int y, int x, int p_height, int offset)
 	int pas;
 
 	i = 0;
-	pas = p_height / SIZE;
-	int j = 0;
-	texture(env, offset, j);
-//	printf("offset %d, i %d, y %d\n", offset, i, y),fflush(stdout);
 	if (!(point = (SDL_Point*)malloc(sizeof(SDL_Point) * p_height)))
 		return;
 	while (i < p_height)
 	{
 		point[i].x = x;
 		point[i].y = y;
-		j += pas;
 		y++;
 		i++;
 	}
-//
-//	while (i < p_height)
-//	{
-//		point[i].x = x;
-//		point[i].y = y;
-//		y++;
-//		i++;
-//	}
 	SDL_RenderDrawPoints(env->render, point, i);
 }
 void	draw_slice(t_env *env, float dist, int type, t_pt *pi)
@@ -51,10 +38,7 @@ void	draw_slice(t_env *env, float dist, int type, t_pt *pi)
 	int y;
 
 	if (dist <= 0)
-	{
-		printf("%f\n", dist);
 		return;
-	}
 	if (type == 0)
 	{
 		if (env->r_angle > 0 && env->r_angle < 180)
@@ -75,7 +59,7 @@ void	draw_slice(t_env *env, float dist, int type, t_pt *pi)
 	if (p_height > env->height)
 		p_height = env->height;
 	y = (env->height / 2) - (p_height / 2);
-	draw_line(env, y, env->ray_nb, p_height, offset);
+//	draw_line(env, y, env->ray_nb, p_height, offset);
 }
 
 void	calc_dist(t_env *env, t_player *p, t_pt *ph, t_pt *pv)
@@ -122,7 +106,7 @@ void	render(t_env *env, t_player *p)
 {
 	env->ray_nb = 0;
 	env->p_dist = SIZE / env->sdist;
-	printf("alpha %d, PX %d, PY %d \n", p->alpha, p->xpos, p->ypos),fflush(stdout);
+//	printf("alpha %d, PX %d, PY %d \n", p->alpha, p->xpos, p->ypos),fflush(stdout);
 	env->r_angle = angle_adjust(p->alpha + (env->fov / 2));
 //	cast_ray(env, p);
 	while(env->ray_nb < env->width)

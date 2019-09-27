@@ -49,8 +49,8 @@ void	control(t_env *env, const Uint8 *keystates)
 		env->p.ypos += round(env->sin_t[env->p.alpha] * env->p.speed);
 	}
 	if (keystates[SDL_SCANCODE_LSHIFT])
-		env->p.speed = 2;
+		env->p.speed = 10;
 	else
-		env->p.speed = 1;
+		env->p.speed = 5;
 	strafe(env, keystates);
 }

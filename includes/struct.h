@@ -57,6 +57,7 @@ typedef struct s_env
 	SDL_Window		*win;
 	SDL_Event		e;
 	SDL_Renderer	*render;
+	SDL_Surface     *surf;
 	t_map			map;
 	int				quit;
 	int				xmov;

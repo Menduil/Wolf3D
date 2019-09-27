@@ -33,7 +33,6 @@ void	wolf(t_env *env)
 			if (env->quit == 1)
 				break;
 			control(env, keystates);
-			texture(env);
 			display(env);
 		}
 	}

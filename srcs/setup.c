@@ -37,22 +37,52 @@ void	angle_table(t_env *env)
 	}
 }
 
+void byte_mask(Uint32 *rmask, Uint32 *gmask, Uint32 *bmask, Uint32 *amask)
+{
+    if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
+    {
+        *rmask = 0xff000000;
+        *gmask = 0x00ff0000;
+        *bmask = 0x0000ff00;
+        *amask = 0x000000ff;
+    }
+    else
+    {
+       *rmask = 0x000000ff;
+       *gmask = 0x0000ff00;
+       *bmask = 0x00ff0000;
+       *amask = 0xff000000;
+    }
+}
+
+SDL_Surface *create_surface(int w, int h)
+{
+    Uint32 rmask;
+    Uint32 gmask;
+    Uint32 bmask;
+    Uint32 amask;
+    SDL_Surface *surface;
+
+    byte_mask(&rmask, &gmask, &bmask, &amask);
+    surface = SDL_CreateRGBSurface(0, w, h, 32, rmask, gmask, bmask, amask);
+    return (surface);
+}
+
 void	setup(t_env *env)
 {
-	t_player p;
-
 	env->p.xpos = 222;
-	env->p.ypos = 221;
-	env->p.alpha = 164;
-	env->p.height = 52;
-	env->p.speed = 1;
-	env->fov = 60;
-	env->width = 1200;
-	env->height = 1024;
-	env->vhit = 0;
-	env->hhit = 0;
-	env->xmov = 0;
-	env->ymov = 0;
+    env->p.ypos = 221;
+    env->p.alpha = 164;
+    env->p.height = 52;
+    env->p.speed = 1;
+    env->fov = 60;
+    env->width = 1200;
+    env->height = 1024;
+    env->vhit = 0;
+    env->hhit = 0;
+    env->xmov = 0;
+    env->ymov = 0;
+//    env->surf = create_surface(env->width, env->height);
 	env->sdist = (env->width / 2) / tan(d_to_r(env->fov / 2));
 	env->r_inc = (float)env->fov / (float)env->width;
 	env->r_angle = 0;
