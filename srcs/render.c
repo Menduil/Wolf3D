@@ -15,7 +15,7 @@
 
 void	draw_line(t_env *env, int y, int x, int p_height, int offset)
 {
-	SDL_Point point[p_height];
+	SDL_Point *point;
 	int i;
 	int pas;
 
@@ -24,6 +24,8 @@ void	draw_line(t_env *env, int y, int x, int p_height, int offset)
 	int j = 0;
 	texture(env, offset, j);
 //	printf("offset %d, i %d, y %d\n", offset, i, y),fflush(stdout);
+	if (!(point = (SDL_Point*)malloc(sizeof(SDL_Point) * p_height)))
+		return;
 	while (i < p_height)
 	{
 		point[i].x = x;
@@ -48,6 +50,11 @@ void	draw_slice(t_env *env, float dist, int type, t_pt *pi)
 	int offset;
 	int y;
 
+	if (dist <= 0)
+	{
+		printf("%f\n", dist);
+		return;
+	}
 	if (type == 0)
 	{
 		if (env->r_angle > 0 && env->r_angle < 180)

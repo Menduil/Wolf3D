@@ -34,9 +34,9 @@ void	control(t_env *env, const Uint8 *keystates)
 	if (env->e.type == SDL_QUIT || keystates[SDL_SCANCODE_ESCAPE])
 		env->quit = 1;
 	if (keystates[SDL_SCANCODE_A])
-		env->p.alpha += 2;
+		env->p.alpha += 1;
 	else if (keystates[SDL_SCANCODE_D])
-		env->p.alpha -= 2;
+		env->p.alpha -= 1;
 	env->p.alpha = angle_adjust(env->p.alpha);
 	if (keystates[SDL_SCANCODE_W])
 	{
@@ -49,8 +49,8 @@ void	control(t_env *env, const Uint8 *keystates)
 		env->p.ypos += round(env->sin_t[env->p.alpha] * env->p.speed);
 	}
 	if (keystates[SDL_SCANCODE_LSHIFT])
-		env->p.speed = 10;
+		env->p.speed = 2;
 	else
-		env->p.speed = 5;
+		env->p.speed = 1;
 	strafe(env, keystates);
 }
