@@ -13,25 +13,39 @@
 
 #include "../includes/wolf3d.h"
 
-void	draw_line(t_env *env, int y, int x, int p_height)
+void	draw_line(t_env *env, int y, int x, int p_height, int offset)
 {
 	SDL_Point point[p_height];
 	int i;
+	int pas;
 
 	i = 0;
+	pas = p_height / SIZE;
+	int j = 0;
+	texture(env, offset, j);
+//	printf("offset %d, i %d, y %d\n", offset, i, y),fflush(stdout);
 	while (i < p_height)
 	{
 		point[i].x = x;
 		point[i].y = y;
+		j += pas;
 		y++;
 		i++;
 	}
-	SDL_RenderDrawPoints(env->render ,point , i);
+//
+//	while (i < p_height)
+//	{
+//		point[i].x = x;
+//		point[i].y = y;
+//		y++;
+//		i++;
+//	}
+	SDL_RenderDrawPoints(env->render, point, i);
 }
-void	draw_slice(t_env *env, float dist, int type)
+void	draw_slice(t_env *env, float dist, int type, t_pt *pi)
 {
 	int p_height;
-	int ymax;
+	int offset;
 	int y;
 
 	if (type == 0)
@@ -40,6 +54,7 @@ void	draw_slice(t_env *env, float dist, int type)
 			SDL_SetRenderDrawColor(env->render, 255, 0, 34, 255);
 		else
 			SDL_SetRenderDrawColor(env->render, 115, 29, 215, 255);
+		offset = (int)pi->x % SIZE;
 	}
 	else
 	{
@@ -47,12 +62,13 @@ void	draw_slice(t_env *env, float dist, int type)
 			SDL_SetRenderDrawColor(env->render, 62, 195, 0, 255);
 		else
 			SDL_SetRenderDrawColor(env->render, 0, 79, 255, 255);
+		offset = (int)pi->y % SIZE;
 	}
 	p_height = trunc(SIZE / dist * env->sdist);
 	if (p_height > env->height)
 		p_height = env->height;
 	y = (env->height / 2) - (p_height / 2);
-	draw_line(env, y, env->ray_nb, p_height);
+	draw_line(env, y, env->ray_nb, p_height, offset);
 }
 
 void	calc_dist(t_env *env, t_player *p, t_pt *ph, t_pt *pv)
@@ -72,9 +88,9 @@ void	calc_dist(t_env *env, t_player *p, t_pt *ph, t_pt *pv)
 //	printf("disth = %f, phx = %f, phy = %f\n", disth, ph->x, ph->y), fflush(stdout);
 
 	if (disth > distv)
-		draw_slice(env, distv * env->cos_t[abs((int)env->r_angle - p->alpha)], 1);
+		draw_slice(env, distv * env->cos_t[abs((int)env->r_angle - p->alpha)], 1, pv);
 	else
-		draw_slice(env, disth * env->cos_t[abs((int)env->r_angle - p->alpha)], 0);
+		draw_slice(env, disth * env->cos_t[abs((int)env->r_angle - p->alpha)], 0, ph);
 }
 
 void	cast_ray(t_env *env, t_player *p)

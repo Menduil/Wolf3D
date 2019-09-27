@@ -39,6 +39,6 @@ float		d_to_r(float x);
 void		check_walls(t_env *env, t_pt *a, int type);
 void		control(t_env *env, const Uint8 *keystates);
 float		angle_adjust(float angle);
-void		texture(t_env *env);
+void		texture(t_env *env, int offset, int j);
 
 #endif
