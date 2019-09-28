@@ -36,5 +36,6 @@ void	wolf(t_env *env)
 			control(env, keystates);
 			display(env);
 		}
+		usleep(200);
 	}
 }

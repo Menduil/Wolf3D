@@ -36,6 +36,8 @@ void	draw_slice(t_env *env, float dist, int type)
 	int p_height;
 	int ymax;
 	int y;
+	int i;
+	int tmp;
 
 	if (dist <= 0)
 		return;
@@ -57,8 +59,14 @@ void	draw_slice(t_env *env, float dist, int type)
 	if (p_height > env->height)
 		p_height = env->height;
 	y = (env->height / 2) - (p_height / 2);
-	if ((env->ray_nb % 1) == 0)
-		draw_line(env, y, env->ray_nb, p_height);
+	draw_line(env, y, env->ray_nb, p_height);
+//	i = (env->height / 2) - (p_height / 2);
+//	tmp = (env->height / 2) + (p_height / 2);
+//	while (i < tmp)
+//	{
+//		SDL_RenderDrawPoint(env->render, env->ray_nb, i);
+//		i += 2;
+//	}
 }
 
 void	calc_dist(t_env *env, t_player *p, t_pt *ph, t_pt *pv)

@@ -33,7 +33,7 @@ INC =	includes/struct.h	\
 
 CC = gcc
 
-#CFLAGS	+= -g3 -Wall -Wextra -Wvla -Werror
+CFLAGS	+= -g3 -Wvla
 
 SDL2 = -I include -L lib -l SDL2-2.0.0
 

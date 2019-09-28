@@ -61,4 +61,5 @@ void	setup(t_env *env)
 	SDL_RenderClear(env->render);
 	SDL_SetRenderDrawColor(env->render, 0, 255, 0, 255);
 	angle_table(env);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 }
