@@ -13,7 +13,7 @@
 
 NAME = wolf3d
 
-SRCS =  srcs/main.c				\
+SRCS =	srcs/main.c				\
 		srcs/wolf.c				\
 		srcs/ray.c				\
 		srcs/get_next_line.c	\
@@ -22,7 +22,9 @@ SRCS =  srcs/main.c				\
 		srcs/setup.c			\
 		srcs/collision.c		\
 		srcs/control.c			\
-		srcs/tools.c
+		srcs/tools.c			\
+		srcs/texture.c			\
+		srcs/sdl.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -41,7 +43,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJS) $(INC)
 		$(MAKE) -C libft
-		$(CC) -o $(NAME) $(OBJS) $(LIB) $(SDL2)
+		$(CC) -o $(NAME) -O3 $(OBJS) $(LIB) $(SDL2)
 
 clean :
 		$(MAKE) clean -C libft

@@ -24,6 +24,7 @@
 # define SIZE 64
 # define BUFF_SIZE 5000
 # define PI 3.14159265359
+# define CYAN 0xFFFFFF00
 
 void		wolf(t_env *env);
 void		render(t_env *env, t_player *p);
@@ -40,5 +41,9 @@ void		check_walls(t_env *env, t_pt *a, int type);
 void		control(t_env *env, const Uint8 *keystates);
 float		angle_adjust(float angle);
 void		map_line_del(t_map_line *map_line);
+void        put_pixel(SDL_Surface *surf, int x, int y, int color);
+SDL_Surface *create_surface(int w, int h);
+SDL_Surface *load_texture(t_env *env, char *path);
+Uint32      get_pixel(SDL_Surface *surface, int x, int y);
 
 #endif

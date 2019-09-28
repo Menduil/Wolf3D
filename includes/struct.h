@@ -57,6 +57,13 @@ typedef struct s_env
 	SDL_Window		*win;
 	SDL_Event		e;
 	SDL_Renderer	*render;
+	SDL_Texture		*texture;
+	SDL_Surface     *surf;
+    SDL_Surface     *textN;
+    SDL_Surface     *textS;
+    SDL_Surface     *textE;
+    SDL_Surface     *textW;
+    SDL_Rect		*rect;
 	t_map			map;
 	int				quit;
 	int				xmov;
