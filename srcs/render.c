@@ -23,16 +23,17 @@ void	draw_line(t_env *env, int y, int x, int p_height, int offset)
 	pas = SIZE / (float)p_height;
 	i = 0;
 	yp = 0;
-    while (i < p_height + 1)
+    while (i < p_height)
 	{
-        SDL_GetRGB(get_pixel(env->textN, offset, round(yp)), env->surf->format, &c.r, &c.g, &c.b);
-        put_pixel(env->surf, x, y, SDL_MapRGB(env->surf->format, c.r, c.g, c.b));
+        if (x >= 0 && y >= 0 && x < env->width && y < env->height)
+        {
+            SDL_GetRGB(get_pixel(env->textN, offset, floor(yp)), env->surf->format, &c.r, &c.g, &c.b);
+            put_pixel(env->surf, x, y, SDL_MapRGB(env->surf->format, c.r, c.g, c.b));
+        }
         yp += pas;
         y++;
         i++;
     }
-    SDL_GetRGB(get_pixel(env->textN, offset, round(yp)), env->surf->format, &c.r, &c.g, &c.b);
-    put_pixel(env->surf, x, y, SDL_MapRGB(env->surf->format, c.r, c.g, c.b));
 }
 void	draw_slice(t_env *env, float dist, int type, t_pt *pi)
 {
@@ -59,8 +60,6 @@ void	draw_slice(t_env *env, float dist, int type, t_pt *pi)
 		offset = (int)pi->y % SIZE;
 	}
 	p_height = trunc(SIZE / dist * env->sdist);
-	if (p_height > env->height)
-		p_height = env->height;
 	y = (env->height / 2) - (p_height / 2);
 	draw_line(env, y, env->ray_nb, p_height, offset);
 }
