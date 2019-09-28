@@ -16,21 +16,24 @@
 void	draw_line(t_env *env, int y, int x, int p_height, int offset)
 {
 	SDL_Point *point;
+	SDL_Color c;
 	int i;
-	int pas;
+	float pas;
+	float yp;
 
+	pas = SIZE / (float)p_height;
 	i = 0;
-	if (!(point = (SDL_Point*)malloc(sizeof(SDL_Point) * p_height)))
-		return;
-	while (i < p_height)
+	yp = 0;
+    while (i < p_height + 1)
 	{
-		point[i].x = x;
-		point[i].y = y;
-		y++;
-		i++;
-	}
-	SDL_RenderDrawPoints(env->render ,point , i);
-	free(point);
+        SDL_GetRGB(get_pixel(env->textN, offset, round(yp)), env->surf->format, &c.r, &c.g, &c.b);
+        put_pixel(env->surf, x, y, SDL_MapRGB(env->surf->format, c.r, c.g, c.b));
+        yp += pas;
+        y++;
+        i++;
+    }
+    SDL_GetRGB(get_pixel(env->textN, offset, round(yp)), env->surf->format, &c.r, &c.g, &c.b);
+    put_pixel(env->surf, x, y, SDL_MapRGB(env->surf->format, c.r, c.g, c.b));
 }
 void	draw_slice(t_env *env, float dist, int type, t_pt *pi)
 {
@@ -42,26 +45,25 @@ void	draw_slice(t_env *env, float dist, int type, t_pt *pi)
 		return;
 	if (type == 0)
 	{
-		if (env->r_angle > 0 && env->r_angle < 180)
-			SDL_SetRenderDrawColor(env->render, 255, 0, 34, 255);
-		else
-			SDL_SetRenderDrawColor(env->render, 115, 29, 215, 255);
+//		if (env->r_angle > 0 && env->r_angle < 180)
+//			SDL_SetRenderDrawColor(env->render, 255, 0, 34, 255);
+//		else
+//			SDL_SetRenderDrawColor(env->render, 115, 29, 215, 255);
 		offset = (int)pi->x % SIZE;
 	}
 	else
 	{
-		if (env->r_angle > 270 || env->r_angle < 90)
-			SDL_SetRenderDrawColor(env->render, 62, 195, 0, 255);
-		else
-			SDL_SetRenderDrawColor(env->render, 0, 79, 255, 255);
+//		if (env->r_angle > 270 || env->r_angle < 90)
+//			SDL_SetRenderDrawColor(env->render, 62, 195, 0, 255);
+//		else
+//			SDL_SetRenderDrawColor(env->render, 0, 79, 255, 255);
 		offset = (int)pi->y % SIZE;
 	}
 	p_height = trunc(SIZE / dist * env->sdist);
 	if (p_height > env->height)
 		p_height = env->height;
 	y = (env->height / 2) - (p_height / 2);
-	if ((env->ray_nb % 3) == 0)
-		draw_line(env, y, env->ray_nb, p_height, offset);
+	draw_line(env, y, env->ray_nb, p_height, offset);
 }
 
 void	calc_dist(t_env *env, t_player *p, t_pt *ph, t_pt *pv)
@@ -77,8 +79,8 @@ void	calc_dist(t_env *env, t_player *p, t_pt *ph, t_pt *pv)
 		distv = sqrt((p->xpos - pv->x) * (p->xpos - pv->x) + (p->ypos - pv->y) * (p->ypos - pv->y));
 	else
 		distv = 99999;
-//	printf("distv = %f, pvx = %f, pvy = %f\n\n", distv, pv->x, pv->y), fflush(stdout);
-//	printf("disth = %f, phx = %f, phy = %f\n", disth, ph->x, ph->y), fflush(stdout);
+//	printf("distv = %f, pvx = %f, pvy = %f, vhit = %d\n\n", distv, pv->x, pv->y, env->vhit), fflush(stdout);
+//	printf("disth = %f, phx = %f, phy = %f, hhit = %d\n", disth, ph->x, ph->y, env->hhit), fflush(stdout);
 
 	if (disth > distv)
 		draw_slice(env, distv * env->cos_t[abs((int)env->r_angle - p->alpha)], 1, pv);
@@ -92,22 +94,12 @@ void	cast_ray(t_env *env, t_player *p)
 	t_pt	dh;
 	t_pt	pv;
 	t_pt	ph;
-	int 	i;
-
-	i = 0;
 	init_horizontal(env, p, &dh, &ph);
 	init_vertical(env, p, &dv, &pv);
-	while (env->hhit == 0 && i < 500)
-	{
+	while (env->hhit == 0)
 		horizontal_ray(env, &ph, &dh);
-		i++;
-	}
-	i = 0;
-	while (env->vhit == 0 && i < 500)
-	{
+	while (env->vhit == 0)
 		vertical_ray(env, &pv, &dv);
-		i++;
-	}
 	calc_dist(env, p, &ph, &pv);
 	env->vhit = 0;
 	env->hhit = 0;
@@ -119,7 +111,6 @@ void	render(t_env *env, t_player *p)
 	env->p_dist = SIZE / env->sdist;
 //	printf("alpha %d, PX %d, PY %d \n", p->alpha, p->xpos, p->ypos),fflush(stdout);
 	env->r_angle = angle_adjust(p->alpha + (env->fov / 2));
-//	cast_ray(env, p);
 	while(env->ray_nb < env->width)
 	{
 		cast_ray(env, p);

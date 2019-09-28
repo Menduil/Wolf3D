@@ -142,6 +142,8 @@ int		main(int ac, char **av)
 		get_map("test.map", &env.map);
 	init(&env);
 	wolf(&env);
+	SDL_FreeSurface(env.surf);
+	free(env.rect);
 	SDL_DestroyRenderer(env.render);
 	SDL_DestroyWindow(env.win);
 	SDL_Quit();

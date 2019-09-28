@@ -13,7 +13,7 @@
 
 NAME = wolf3d
 
-SRCS =  srcs/main.c				\
+SRCS =	srcs/main.c				\
 		srcs/wolf.c				\
 		srcs/ray.c				\
 		srcs/get_next_line.c	\
@@ -23,7 +23,8 @@ SRCS =  srcs/main.c				\
 		srcs/collision.c		\
 		srcs/control.c			\
 		srcs/tools.c			\
-		srcs/texture.c
+		srcs/texture.c			\
+		srcs/sdl.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -34,7 +35,7 @@ INC =	includes/struct.h	\
 
 CC = gcc
 
-CFLAGS	+= -g3
+CFLAGS	+= -g3 -Wvla
 
 SDL2 = -I include -L lib -l SDL2-2.0.0
 
