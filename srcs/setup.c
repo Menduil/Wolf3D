@@ -39,8 +39,6 @@ void	angle_table(t_env *env)
 
 void	setup(t_env *env)
 {
-	t_player p;
-
 	env->p.xpos = 222;
 	env->p.ypos = 221;
 	env->p.alpha = 164;
