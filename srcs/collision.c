@@ -27,12 +27,7 @@ void	check_walls(t_env *env, t_pt *a, int type)
 {
 	t_ptint b;
 
-
-	//printf("Type = %d\n", type), fflush(stdout);
-	//printf("a = %f / %f\n", a->x, a->y), fflush(stdout);
 	b = convert(a);
-	//printf("b = %d / %d\n\n", b.x, b.y), fflush(stdout);
-    //printf("w = %d h = %d\n\n", env->map.width, env->map.height),fflush(stdout);
 	if (b.x < 0 || b.y < 0
 		|| b.x > env->map.width - 1 || b.y > env->map.height - 1)
 	{
