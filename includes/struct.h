@@ -63,6 +63,7 @@ typedef struct s_env
     SDL_Surface     *textS;
     SDL_Surface     *textE;
     SDL_Surface     *textW;
+    SDL_Surface     *text;
     SDL_Rect		*rect;
 	t_map			map;
 	int				quit;

@@ -59,10 +59,10 @@ void	setup(t_env *env)
 	env->sdist = (env->width / 2) / tan(d_to_r(env->fov / 2));
 	env->r_inc = (float)env->fov / (float)env->width;
 	env->r_angle = 0;
-	env->textN = load_texture(env, "texture/brick.bmp");
-//	env->textS = load_texture(env, "texture");
-//	env->textE = load_texture(env, "texture");
-//	env->textW = load_texture(env, "texture");
+	env->textN = load_texture(env, "texture/stonemold.bmp");
+	env->textS = load_texture(env, "texture/bluegrey.bmp");
+	env->textE = load_texture(env, "texture/brick.bmp");
+	env->textW = load_texture(env, "texture/woodbrick.bmp");
 	env->render = SDL_CreateRenderer(env->win, -1, SDL_RENDERER_PRESENTVSYNC);
 	SDL_SetRenderDrawColor(env->render, 0, 0, 0, 255);
 	angle_table(env);

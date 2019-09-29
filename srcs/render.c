@@ -20,21 +20,45 @@ void	draw_line(t_env *env, int y, int x, int p_height, int offset)
 	int i;
 	float pas;
 	float yp;
+	int ypd;
 
 	pas = SIZE / (float)p_height;
 	i = 0;
 	yp = 0;
+	ypd = 0;
+
+	c.r = 135;
+	c.g = 206;
+	c.b = 235;
+	while (i < (env->height - p_height) / 2)
+	{
+		put_pixel(env->surf, x, i, SDL_MapRGB(env->surf->format, c.r, c.g, c.b));
+		i++;
+	}
+	i = 0;
     while (i < p_height)
 	{
         if (x >= 0 && y >= 0 && x < env->width && y < env->height)
         {
-            SDL_GetRGB(get_pixel(env->textN, offset, floor(yp)), env->surf->format, &c.r, &c.g, &c.b);
+            if (ypd != trunc(yp))
+            {
+                SDL_GetRGB(get_pixel(env->text, offset, floor(yp)), env->surf->format, &c.r, &c.g, &c.b);
+                ypd = trunc(yp);
+            }
             put_pixel(env->surf, x, y, SDL_MapRGB(env->surf->format, c.r, c.g, c.b));
         }
         yp += pas;
         y++;
         i++;
     }
+	c.r = 128;
+	c.g = 128;
+	c.b = 128;
+	while (y < env->height)
+	{
+		put_pixel(env->surf, x, y, SDL_MapRGB(env->surf->format, c.r, c.g, c.b));
+    	y++;
+	}
 }
 void	draw_slice(t_env *env, float dist, int type, t_pt *pi)
 {
@@ -46,18 +70,18 @@ void	draw_slice(t_env *env, float dist, int type, t_pt *pi)
 		return;
 	if (type == 0)
 	{
-//		if (env->r_angle > 0 && env->r_angle < 180)
-//			SDL_SetRenderDrawColor(env->render, 255, 0, 34, 255);
-//		else
-//			SDL_SetRenderDrawColor(env->render, 115, 29, 215, 255);
+		if (env->r_angle > 0 && env->r_angle < 180)
+			env->text = env->textN;
+		else
+            env->text = env->textS;
 		offset = (int)pi->x % SIZE;
 	}
 	else
 	{
-//		if (env->r_angle > 270 || env->r_angle < 90)
-//			SDL_SetRenderDrawColor(env->render, 62, 195, 0, 255);
-//		else
-//			SDL_SetRenderDrawColor(env->render, 0, 79, 255, 255);
+		if (env->r_angle > 270 || env->r_angle < 90)
+            env->text = env->textE;
+		else
+            env->text = env->textW;
 		offset = (int)pi->y % SIZE;
 	}
 	p_height = trunc(SIZE / dist * env->sdist);
