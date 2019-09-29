@@ -61,7 +61,7 @@ void	setup(t_env *env)
 	env->r_angle = 0;
 	env->textN = load_texture(env, "texture/stonemold.bmp");
 	env->textS = load_texture(env, "texture/bluegrey.bmp");
-	env->textE = load_texture(env, "texture/brick.bmp");
+	env->textE = load_texture(env, "texture/steelwall.bmp");
 	env->textW = load_texture(env, "texture/woodbrick.bmp");
 	env->render = SDL_CreateRenderer(env->win, -1, SDL_RENDERER_PRESENTVSYNC);
 	SDL_SetRenderDrawColor(env->render, 0, 0, 0, 255);

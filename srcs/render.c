@@ -13,52 +13,6 @@
 
 #include "../includes/wolf3d.h"
 
-void	draw_line(t_env *env, int y, int x, int p_height, int offset)
-{
-	SDL_Color c;
-	int i;
-	float pas;
-	float yp;
-	int ypd;
-
-	pas = SIZE / (float)p_height;
-	i = 0;
-	yp = 0;
-	ypd = 0;
-
-	c.r = 135;
-	c.g = 206;
-	c.b = 235;
-	while (i < (env->height - p_height) / 2)
-	{
-		put_pixel(env->surf, x, i, SDL_MapRGB(env->surf->format, c.r, c.g, c.b));
-		i++;
-	}
-	i = 0;
-    while (i < p_height)
-	{
-        if (x >= 0 && y >= 0 && x < env->width && y < env->height)
-        {
-            if (ypd != trunc(yp))
-            {
-                SDL_GetRGB(get_pixel(env->text, offset, floor(yp)), env->surf->format, &c.r, &c.g, &c.b);
-                ypd = trunc(yp);
-            }
-            put_pixel(env->surf, x, y, SDL_MapRGB(env->surf->format, c.r, c.g, c.b));
-        }
-        yp += pas;
-        y++;
-        i++;
-    }
-	c.r = 128;
-	c.g = 128;
-	c.b = 128;
-	while (y < env->height)
-	{
-		put_pixel(env->surf, x, y, SDL_MapRGB(env->surf->format, c.r, c.g, c.b));
-    	y++;
-	}
-}
 void	draw_slice(t_env *env, float dist, int type, t_pt *pi)
 {
 	int p_height;
@@ -116,6 +70,7 @@ void	cast_ray(t_env *env, t_player *p)
 	t_pt	dh;
 	t_pt	pv;
 	t_pt	ph;
+
 	init_horizontal(env, p, &dh, &ph);
 	init_vertical(env, p, &dv, &pv);
 	while (env->hhit == 0)

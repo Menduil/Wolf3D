@@ -18,7 +18,7 @@ void	init_horizontal(t_env *env, t_player *p, t_pt *dh, t_pt *ph)
 	int dy;
 	dy = p->ypos % SIZE;
 
-	if (trunc(env->r_angle) == 0 || trunc(env->r_angle) == 180)
+	if (env->r_angle == 0 || env->r_angle == 180)
 	{
 		env->hhit = 2;
 		return ;
@@ -48,7 +48,7 @@ void	init_vertical(t_env *env, t_player *p, t_pt *dv, t_pt *pv)
 	int dx;
 
 	dx = SIZE - (p->xpos % SIZE);
-	if (trunc(env->r_angle) == 90 || trunc(env->r_angle) == 270)
+	if (env->r_angle == 90 || env->r_angle == 270)
 	{
 		env->vhit = 2;
 		return ;

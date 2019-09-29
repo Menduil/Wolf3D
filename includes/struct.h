@@ -14,16 +14,16 @@
 #ifndef WOLF_3D_STRUCT_H
 # define WOLF_3D_STRUCT_H
 
-typedef struct	s_pt
+typedef struct  s_pt
 {
 	float		x;
 	float		y;
 }				t_pt;
 
-typedef struct	s_ptint
+typedef struct  s_ptint
 {
-	int		x;
-	int		y;
+	int         x;
+	int         y;
 }				t_ptint;
 
 typedef struct  s_map_line

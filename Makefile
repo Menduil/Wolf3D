@@ -23,7 +23,8 @@ SRCS =	srcs/main.c				\
 		srcs/collision.c		\
 		srcs/control.c			\
 		srcs/tools.c			\
-		srcs/sdl.c
+		srcs/sdl.c				\
+		srcs/draw.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -34,7 +35,7 @@ INC =	includes/struct.h	\
 
 CC = gcc
 
-CFLAGS	+= -g3 -Wall -Wextra -Wvla -Werror
+CFLAGS	+= -g3
 
 SDL2 = -I include -L lib -l SDL2-2.0.0
 
