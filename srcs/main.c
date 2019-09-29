@@ -147,5 +147,6 @@ int		main(int ac, char **av)
 	SDL_DestroyRenderer(env.render);
 	SDL_DestroyWindow(env.win);
 	SDL_Quit();
+	while (1);
 	return (0);
 }
