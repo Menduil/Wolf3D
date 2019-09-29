@@ -23,7 +23,8 @@ SRCS =	srcs/main.c				\
 		srcs/collision.c		\
 		srcs/control.c			\
 		srcs/tools.c			\
-		srcs/sdl.c
+		srcs/sdl.c				\
+		srcs/get_map.c
 
 OBJS = $(SRCS:.c=.o)
 
