@@ -21,7 +21,7 @@ void	display(t_env *env)
 	env->texture = SDL_CreateTextureFromSurface(env->render, env->surf);
 	SDL_RenderCopy(env->render, env->texture, NULL, env->rect);
 	SDL_RenderPresent(env->render);
-	SDL_FillRect(env->surf,NULL,SDL_MapRGB(env->surf->format, 0, 0, 0));
+	SDL_FillRect(env->surf, NULL, SDL_MapRGB(env->surf->format, 0, 0, 0));
 }
 
 void	wolf(t_env *env)
@@ -35,7 +35,7 @@ void	wolf(t_env *env)
 		{
 			keystates = SDL_GetKeyboardState(NULL);
 			if (env->quit == 1)
-				break;
+				break ;
 			control(env, keystates);
 			display(env);
 		}

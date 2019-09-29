@@ -16,8 +16,8 @@
 void	init_horizontal(t_env *env, t_player *p, t_pt *dh, t_pt *ph)
 {
 	int dy;
-	dy = p->ypos % SIZE;
 
+	dy = p->ypos % SIZE;
 	if (env->r_angle == 0 || env->r_angle == 180)
 	{
 		env->hhit = 2;
@@ -39,8 +39,6 @@ void	init_horizontal(t_env *env, t_player *p, t_pt *dh, t_pt *ph)
 		dh->x = (-1 / tan(d_to_r(env->r_angle)) * SIZE);
 		check_walls(env, ph, 1);
 	}
-//	printf("H dy = %d \nph x %f, y %f \ndh x %f, y %f\n\n", dy, ph->x, ph->y, dh->x, dh->y), fflush(stdout);
-
 }
 
 void	init_vertical(t_env *env, t_player *p, t_pt *dv, t_pt *pv)
@@ -69,8 +67,6 @@ void	init_vertical(t_env *env, t_player *p, t_pt *dv, t_pt *pv)
 		dv->y = (tan(d_to_r(env->r_angle)) * SIZE);
 		check_walls(env, pv, 3);
 	}
-//	printf("V dx = %d \npv x %f, y %f \ndv x %f, y %f\n\n", dx, pv->x, pv->y, dv->x, dv->y), fflush(stdout);
-
 }
 
 void	horizontal_ray(t_env *env, t_pt *ph, t_pt *dh)

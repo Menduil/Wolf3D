@@ -20,7 +20,6 @@ t_ptint	convert(t_pt *a)
 	b.x = (int)floor(a->x / SIZE);
 	b.y = (int)floor(a->y / SIZE);
 	return (b);
-
 }
 
 void	check_walls(t_env *env, t_pt *a, int type)

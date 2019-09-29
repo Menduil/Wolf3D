@@ -28,7 +28,7 @@ void	set_spawn(t_env *env)
 			{
 				env->p.xpos = x * 64;
 				env->p.ypos = y * 64;
-				break;
+				break ;
 			}
 			x++;
 		}
@@ -38,7 +38,7 @@ void	set_spawn(t_env *env)
 
 void	init(t_env *env)
 {
-	if(SDL_Init(SDL_INIT_VIDEO) != 0)
+	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 	{
 		SDL_Log("ERREUR : Init SDL > %s\n", SDL_GetError());
 		exit(0);
@@ -63,7 +63,7 @@ int		main(int ac, char **av)
 	if (ac == 2)
 		get_map(av[1], &env.map);
 	else
-		get_map("test.map", &env.map);
+		get_map("e1m1.map", &env.map);
 	init(&env);
 	wolf(&env);
 	SDL_FreeSurface(env.surf);

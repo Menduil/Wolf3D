@@ -25,7 +25,8 @@ SRCS =	srcs/main.c				\
 		srcs/tools.c			\
 		srcs/sdl.c				\
 		srcs/draw.c				\
-		srcs/get_map.c
+		srcs/get_map.c			\
+		srcs/fill_one.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -20,21 +20,21 @@ void	draw_slice(t_env *env, float dist, int type, t_pt *pi)
 	int y;
 
 	if (dist <= 0)
-		return;
+		return ;
 	if (type == 0)
 	{
 		if (env->r_angle > 0 && env->r_angle < 180)
 			env->text = env->textN;
 		else
-            env->text = env->textS;
+			env->text = env->textS;
 		offset = (int)pi->x % SIZE;
 	}
 	else
 	{
 		if (env->r_angle > 270 || env->r_angle < 90)
-            env->text = env->textE;
+			env->text = env->textE;
 		else
-            env->text = env->textW;
+			env->text = env->textW;
 		offset = (int)pi->y % SIZE;
 	}
 	p_height = trunc(SIZE / dist * env->sdist);
@@ -48,20 +48,21 @@ void	calc_dist(t_env *env, t_player *p, t_pt *ph, t_pt *pv)
 	float	distv;
 
 	if (env->hhit == 1)
-		disth = sqrt((p->xpos - ph->x) * (p->xpos - ph->x) + (p->ypos - ph->y) * (p->ypos - ph->y));
+		disth = sqrt((p->xpos - ph->x) *
+				(p->xpos - ph->x) + (p->ypos - ph->y) * (p->ypos - ph->y));
 	else
 		disth = 99999;
 	if (env->vhit == 1)
-		distv = sqrt((p->xpos - pv->x) * (p->xpos - pv->x) + (p->ypos - pv->y) * (p->ypos - pv->y));
+		distv = sqrt((p->xpos - pv->x) *
+				(p->xpos - pv->x) + (p->ypos - pv->y) * (p->ypos - pv->y));
 	else
 		distv = 99999;
-//	printf("distv = %f, pvx = %f, pvy = %f, vhit = %d\n\n", distv, pv->x, pv->y, env->vhit), fflush(stdout);
-//	printf("disth = %f, phx = %f, phy = %f, hhit = %d\n", disth, ph->x, ph->y, env->hhit), fflush(stdout);
-
 	if (disth > distv)
-		draw_slice(env, distv * env->cos_t[abs((int)env->r_angle - p->alpha)], 1, pv);
+		draw_slice(env, distv *
+		env->cos_t[abs((int)env->r_angle - p->alpha)], 1, pv);
 	else
-		draw_slice(env, disth * env->cos_t[abs((int)env->r_angle - p->alpha)], 0, ph);
+		draw_slice(env, disth *
+		env->cos_t[abs((int)env->r_angle - p->alpha)], 0, ph);
 }
 
 void	cast_ray(t_env *env, t_player *p)
@@ -86,9 +87,8 @@ void	render(t_env *env, t_player *p)
 {
 	env->ray_nb = 0;
 	env->p_dist = SIZE / env->sdist;
-//	printf("alpha %d, PX %d, PY %d \n", p->alpha, p->xpos, p->ypos),fflush(stdout);
 	env->r_angle = angle_adjust(p->alpha + (env->fov / 2));
-	while(env->ray_nb < env->width)
+	while (env->ray_nb < env->width)
 	{
 		cast_ray(env, p);
 		env->r_angle -= env->r_inc;

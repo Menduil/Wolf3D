@@ -24,7 +24,7 @@ t_map_line	*map_line_new(void)
 	return (new_map_line);
 }
 
-void    map_line_next(t_map_line *map_line, char *str)
+void		map_line_next(t_map_line *map_line, char *str)
 {
 	t_map_line		*new_line;
 	int				i;
@@ -41,7 +41,7 @@ void    map_line_next(t_map_line *map_line, char *str)
 	new_line->line = ft_strdup(str);
 }
 
-void	map_line_del(t_map_line *map_line)
+void		map_line_del(t_map_line *map_line)
 {
 	if (map_line->next != NULL)
 		map_line_del(map_line->next);
@@ -49,4 +49,3 @@ void	map_line_del(t_map_line *map_line)
 	map_line->nbl = 0;
 	free(map_line);
 }
-

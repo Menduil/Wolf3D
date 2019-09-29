@@ -26,6 +26,6 @@ size_t		ft_strlen(const char *s);
 char		*ft_strdup(const char *s);
 int			ft_atoi(char const *str);
 char		*ft_itoa(int n);
-
+int 		get_nb(char *line);
 
 #endif

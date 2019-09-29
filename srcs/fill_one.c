@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                          LE - /            */
 /*                                                              /             */
-/*   tools.c                                          .::    .:/ .      .::   */
+/*   fill_one.c                                       .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: ebourgeo <ebourgeo@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: brey-gal <brey-gal@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/09/24 17:33:40 by ebourgeo     #+#   ##    ##    #+#       */
-/*   Updated: 2019/09/24 17:33:40 by ebourgeo    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/09/29 19:29:19 by brey-gal     #+#   ##    ##    #+#       */
+/*   Updated: 2019/09/29 19:29:19 by brey-gal    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../includes/wolf3d.h"
 
-float	d_to_r(float x)
+void			fill_one(int *int_line, char *line, int max)
 {
-	return (PI * x / 180);
-}
+	int nbl;
+	int i;
 
-float	angle_adjust(float angle)
-{
-	while (angle < 0)
-		angle = 360 + angle;
-	while (angle > 359)
-		angle = 0 - (360 - angle);
-	return (angle);
+	i = 0;
+	nbl = get_nb(line);
+	while (i < nbl)
+		i++;
+	while (i < max)
+	{
+		int_line[i] = 1;
+		i++;
+	}
 }
