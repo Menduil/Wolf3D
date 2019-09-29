@@ -13,33 +13,43 @@
 
 #include "../includes/wolf3d.h"
 
-void	draw_slice(t_env *env, float dist, int type, t_pt *pi)
+void	texture_chooser(t_env *env, int type)
 {
-	int p_height;
-	int offset;
-	int y;
-
-	if (dist <= 0)
-		return ;
 	if (type == 0)
 	{
 		if (env->r_angle > 0 && env->r_angle < 180)
-			env->text = env->textN;
+			env->text = env->text_n;
 		else
-			env->text = env->textS;
-		offset = (int)pi->x % SIZE;
+			env->text = env->text_s;
 	}
 	else
 	{
 		if (env->r_angle > 270 || env->r_angle < 90)
-			env->text = env->textE;
+			env->text = env->text_e;
 		else
-			env->text = env->textW;
-		offset = (int)pi->y % SIZE;
+			env->text = env->text_w;
 	}
+}
+
+void	draw_slice(t_env *env, float dist, int type, t_pt *pi)
+{
+	int		p_height;
+	int		offset;
+	int		y;
+	t_pt	col;
+
+	if (dist <= 0)
+		return ;
+	texture_chooser(env, type);
+	if (type == 0)
+		offset = (int)pi->x % SIZE;
+	else
+		offset = (int)pi->y % SIZE;
 	p_height = trunc(SIZE / dist * env->sdist);
 	y = (env->height / 2) - (p_height / 2);
-	draw_line(env, y, env->ray_nb, p_height, offset);
+	col.y = y;
+	col.x = env->ray_nb;
+	draw_line(env, &col, p_height, offset);
 }
 
 void	calc_dist(t_env *env, t_player *p, t_pt *ph, t_pt *pv)
@@ -48,21 +58,21 @@ void	calc_dist(t_env *env, t_player *p, t_pt *ph, t_pt *pv)
 	float	distv;
 
 	if (env->hhit == 1)
-		disth = sqrt((p->xpos - ph->x) *
-				(p->xpos - ph->x) + (p->ypos - ph->y) * (p->ypos - ph->y));
+		disth = sqrt((p->xpos - ph->x)
+				* (p->xpos - ph->x) + (p->ypos - ph->y) * (p->ypos - ph->y));
 	else
 		disth = 99999;
 	if (env->vhit == 1)
-		distv = sqrt((p->xpos - pv->x) *
-				(p->xpos - pv->x) + (p->ypos - pv->y) * (p->ypos - pv->y));
+		distv = sqrt((p->xpos - pv->x)
+				* (p->xpos - pv->x) + (p->ypos - pv->y) * (p->ypos - pv->y));
 	else
 		distv = 99999;
 	if (disth > distv)
-		draw_slice(env, distv *
-		env->cos_t[abs((int)env->r_angle - p->alpha)], 1, pv);
+		draw_slice(env, distv
+		* env->cos_t[abs((int)env->r_angle - p->alpha)], 1, pv);
 	else
-		draw_slice(env, disth *
-		env->cos_t[abs((int)env->r_angle - p->alpha)], 0, ph);
+		draw_slice(env, disth
+		* env->cos_t[abs((int)env->r_angle - p->alpha)], 0, ph);
 }
 
 void	cast_ray(t_env *env, t_player *p)

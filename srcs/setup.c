@@ -39,10 +39,10 @@ void	angle_table(t_env *env)
 
 void	texture_load(t_env *env)
 {
-	env->textN = load_texture(env, "texture/stonemold.bmp");
-	env->textS = load_texture(env, "texture/bluegrey.bmp");
-	env->textE = load_texture(env, "texture/steelwall.bmp");
-	env->textW = load_texture(env, "texture/woodbrick.bmp");
+	env->text_n = load_texture(env, "texture/stonemold.bmp");
+	env->text_s = load_texture(env, "texture/bluegrey.bmp");
+	env->text_e = load_texture(env, "texture/steelwall.bmp");
+	env->text_w = load_texture(env, "texture/woodbrick.bmp");
 }
 
 void	setup(t_env *env)

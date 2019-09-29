@@ -22,6 +22,20 @@ t_ptint	convert(t_pt *a)
 	return (b);
 }
 
+void	check_walls2(t_env *env, t_ptint *b, int type)
+{
+	if (type == 0)
+	{
+		if (env->map.map[b->y - 1][b->x] == 1)
+			env->hhit = 1;
+	}
+	else
+	{
+		if (env->map.map[b->y][b->x] == 1)
+			env->hhit = 1;
+	}
+}
+
 void	check_walls(t_env *env, t_pt *a, int type)
 {
 	t_ptint b;
@@ -36,29 +50,15 @@ void	check_walls(t_env *env, t_pt *a, int type)
 			env->vhit = -1;
 	}
 	else if (type < 2)
+		check_walls2(env, &b, type);
+	else if (type == 2)
 	{
-		if (type == 0)
-		{
-			if (env->map.map[b.y - 1][b.x] == 1)
-				env->hhit = 1;
-		}
-		else
-		{
-			if (env->map.map[b.y][b.x] == 1)
-				env->hhit = 1;
-		}
+		if (env->map.map[b.y][b.x] == 1)
+			env->vhit = 1;
 	}
 	else
 	{
-		if (type == 2)
-		{
-			if (env->map.map[b.y][b.x] == 1)
-				env->vhit = 1;
-		}
-		else
-		{
-			if (env->map.map[b.y][b.x - 1] == 1)
-				env->vhit = 1;
-		}
+		if (env->map.map[b.y][b.x - 1] == 1)
+			env->vhit = 1;
 	}
 }
