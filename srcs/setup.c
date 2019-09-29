@@ -45,16 +45,16 @@ void	setup(t_env *env)
     env->p.height = 52;
     env->p.speed = 1;
     env->fov = 60;
+    env->vhit = 0;
     env->width = 1200;
     env->height = 1024;
-    env->vhit = 0;
     env->hhit = 0;
     env->xmov = 0;
     env->ymov = 0;
     env->rect = malloc(sizeof(SDL_Rect));
-    SDL_GetWindowSize(env->win, &env->rect->w, &env->rect->h);
     env->rect->x = 0;
 	env->rect->y = 0;
+    SDL_GetWindowSize(env->win, &env->rect->w, &env->rect->h);
     env->surf = create_surface(env->rect->w, env->rect->h);
 	env->sdist = (env->width / 2) / tan(d_to_r(env->fov / 2));
 	env->r_inc = (float)env->fov / (float)env->width;
@@ -66,4 +66,5 @@ void	setup(t_env *env)
 	env->render = SDL_CreateRenderer(env->win, -1, SDL_RENDERER_PRESENTVSYNC);
 	SDL_SetRenderDrawColor(env->render, 0, 0, 0, 255);
 	angle_table(env);
+	SDL_SetRelativeMouseMode(SDL_TRUE);
 }

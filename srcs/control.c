@@ -13,19 +13,32 @@
 
 #include "../includes/wolf3d.h"
 
-void	strafe(t_env *env, const Uint8 *keystates)
+void	control_next(t_env *env, const Uint8 *keystates)
 {
 	int alpha_s;
+	int x;
+	int y;
 	alpha_s = angle_adjust(env->p.alpha + 90);
-	if (keystates[SDL_SCANCODE_Q])
+	if (keystates[SDL_SCANCODE_D])
+	{
+		env->p.xpos -= round(env->cos_t[alpha_s] * (env->p.speed / 2));
+		env->p.ypos += round(env->sin_t[alpha_s] * (env->p.speed / 2));
+	}
+	else if (keystates[SDL_SCANCODE_A])
 	{
 		env->p.xpos += round(env->cos_t[alpha_s] * (env->p.speed / 2));
 		env->p.ypos -= round(env->sin_t[alpha_s] * (env->p.speed / 2));
 	}
-	else if (keystates[SDL_SCANCODE_E])
+	SDL_GetRelativeMouseState(&x, &y);
+	if ((x > 3 || x < -3))
+		env->p.alpha -= x / 10;
+	env->p.alpha = angle_adjust(env->p.alpha);
+	if (env->e.key.keysym.scancode == SDL_SCANCODE_SPACE)
 	{
-		env->p.xpos -= round(env->cos_t[alpha_s] * (env->p.speed / 2));
-		env->p.ypos += round(env->sin_t[alpha_s] * (env->p.speed / 2));
+		if (SDL_GetRelativeMouseMode() == SDL_TRUE)
+			SDL_SetRelativeMouseMode(SDL_FALSE);
+		else
+			SDL_SetRelativeMouseMode(SDL_TRUE);
 	}
 }
 
@@ -33,11 +46,10 @@ void	control(t_env *env, const Uint8 *keystates)
 {
 	if (env->e.type == SDL_QUIT || keystates[SDL_SCANCODE_ESCAPE])
 		env->quit = 1;
-	if (keystates[SDL_SCANCODE_A])
+	if (keystates[SDL_SCANCODE_Q])
 		env->p.alpha += 1;
-	else if (keystates[SDL_SCANCODE_D])
+	else if (keystates[SDL_SCANCODE_E])
 		env->p.alpha -= 1;
-	env->p.alpha = angle_adjust(env->p.alpha);
 	if (keystates[SDL_SCANCODE_W])
 	{
 		env->p.xpos += round(env->cos_t[env->p.alpha] * env->p.speed);
@@ -52,5 +64,5 @@ void	control(t_env *env, const Uint8 *keystates)
 		env->p.speed = 10;
 	else
 		env->p.speed = 5;
-	strafe(env, keystates);
+	control_next(env, keystates);
 }

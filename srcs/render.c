@@ -15,7 +15,6 @@
 
 void	draw_line(t_env *env, int y, int x, int p_height, int offset)
 {
-	SDL_Point *point;
 	SDL_Color c;
 	int i;
 	float pas;

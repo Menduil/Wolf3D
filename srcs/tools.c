@@ -20,9 +20,9 @@ float	d_to_r(float x)
 
 float	angle_adjust(float angle)
 {
-	if (angle < 0)
+	while (angle < 0)
 		angle = 359 + angle;
-	else if (angle > 359)
+	while (angle > 359)
 		angle = 0 - (360 - angle);
 	return (angle);
 }
