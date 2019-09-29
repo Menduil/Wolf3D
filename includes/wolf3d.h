@@ -46,5 +46,6 @@ SDL_Surface *create_surface(int w, int h);
 SDL_Surface *load_texture(t_env *env, char *path);
 Uint32      get_pixel(SDL_Surface *surface, int x, int y);
 void	    draw_line(t_env *env, int y, int x, int p_height, int offset);
+void		get_map(char *av, t_map *map);
 
 #endif

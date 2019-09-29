@@ -13,105 +13,27 @@
 
 #include "../includes/wolf3d.h"
 
-int             get_nb(char *line)
+void	set_spawn(t_env *env)
 {
-	int i;
-	int nb;
-	int space;
+	int x;
+	int y;
 
-	i = 0;
-	nb = 0;
-	space = 0;
-	while (line[i])
+	y = 0;
+	while (y < env->map.height)
 	{
-		if (line[i] != ' ' && space == 0)
+		x = 0;
+		while (x < env->map.width)
 		{
-			nb++;
-			space = 1;
+			if (env->map.map[y][x] == 3)
+			{
+				env->p.xpos = x * 64;
+				env->p.ypos = y * 64;
+				break;
+			}
+			x++;
 		}
-		if (line[i] == ' ' && space == 1)
-			space = 0;
-		i++;
+		y++;
 	}
-	return (nb);
-}
-
-void    operation(int *i)
-{
-	i[2] = i[2] + i[1];
-	i[1] = 0;
-	i[0]++;
-}
-
-int             *line_convert(char *line)
-{
-	int             i[3];
-	int             *int_line;
-	char 			*tmp;
-
-	i[0] = 0;
-	i[1] = 0;
-	i[2] = 0;
-	if (!(int_line = (int *)malloc(sizeof(int) * get_nb(line) + 1)))
-		return (0);
-	while (i[0] < get_nb(line))
-	{
-		while (line[i[2]] == ' ')
-			i[2]++;
-		while ((line[i[1] + i[2]] >= '0' && line[i[1] + i[2]] <= '9')
-			   || line[i[1] + i[2]] == '-' || line[i[1] + i[2]] == '+')
-			i[1]++;
-		tmp = ft_strsub(line, i[2], i[1]);
-		int_line[i[0]] = ft_atoi(tmp);
-		free(tmp);
-		operation(i);
-	}
-	return (int_line);
-}
-
-
-void	map_convert(t_map_line *map_line, t_map *map)
-{
-	t_map_line		*nb_line;
-	int				i;
-	int				tmp;
-
-	nb_line = map_line;
-	while (nb_line->next != NULL)
-		nb_line = nb_line->next;
-	if (!(map->map = (int **)malloc(sizeof(int *) * nb_line->nbl)))
-		exit(1);
-	map->height = nb_line->nbl;
-	i = 0;
-	map_line = map_line->next;
-	while (map_line->next != NULL)
-	{
-		tmp = get_nb(map_line->line);
-		if (map->width < tmp)
-			map->width = tmp;
-		map->map[i] = line_convert(map_line->line);
-		map_line = map_line->next;
-		i++;
-	}
-	map->map[i] = line_convert(map_line->line);
-}
-
-void	get_map(char *av, t_map *map)
-{
-	t_map_line	*map_line;
-	char 		*line;
-	int			fd;
-
-	if ((fd = open(av, O_RDONLY)) < 0)
-		exit(1);
-	map_line = map_line_new();
-	while (get_next_line(fd, &line) > 0)
-	{
-		map_line_next(map_line, line);
-		free(line);
-	}
-	map_convert(map_line, map);
-	map_line_del(map_line);
 }
 
 void	init(t_env *env)
@@ -128,6 +50,7 @@ void	init(t_env *env)
 		SDL_Log("ERREUR : Creation fenetre echouee > %s\n", SDL_GetError());
 		exit(0);
 	}
+	set_spawn(env);
 	setup(env);
 	env->quit = 0;
 }
@@ -136,6 +59,7 @@ int		main(int ac, char **av)
 {
 	t_env	env;
 
+	env.map.width = 0;
 	if (ac == 2)
 		get_map(av[1], &env.map);
 	else

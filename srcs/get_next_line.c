@@ -40,6 +40,8 @@ char		*line_counter(char **str)
 
 	i = 0;
 	j = 0;
+	if (!(*str))
+		return (NULL);
 	if ((*str)[i] == '\0')
 		return (NULL);
 	while ((*str)[i] != '\n' && (*str)[i])
