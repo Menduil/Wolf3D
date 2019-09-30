@@ -60,6 +60,8 @@ int		main(int ac, char **av)
 	t_env	env;
 
 	env.map.width = 0;
+	env.p.xpos = 70;
+	env.p.ypos = 70;
 	if (ac == 2)
 		get_map(av[1], &env.map);
 	else

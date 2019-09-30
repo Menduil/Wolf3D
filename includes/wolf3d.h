@@ -18,7 +18,6 @@
 # include <fcntl.h>
 # include <math.h>
 # include "sdl2/SDL.h"
-# include <stdio.h>
 # include "struct.h"
 # include "../libft/libft.h"
 # define SIZE 64

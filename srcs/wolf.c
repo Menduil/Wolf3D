@@ -17,7 +17,6 @@ void	display(t_env *env)
 {
 	render(env, &env->p);
 	SDL_DestroyTexture(env->texture);
-	SDL_RenderClear(env->render);
 	env->texture = SDL_CreateTextureFromSurface(env->render, env->surf);
 	SDL_RenderCopy(env->render, env->texture, NULL, env->rect);
 	SDL_RenderPresent(env->render);
