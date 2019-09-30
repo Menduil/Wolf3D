@@ -38,6 +38,6 @@ void	wolf(t_env *env)
 			control(env, keystates);
 			display(env);
 		}
-		usleep(200);
+		SDL_Delay(200);
 	}
 }
