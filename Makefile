@@ -13,6 +13,17 @@
 
 NAME = wolf3d
 
+LIBS =	libft/ft_puterror.c   \
+		libft/ft_putstr.c		\
+		libft/ft_strnew.c		\
+		libft/ft_strjoin.c	\
+		libft/ft_strcpy.c		\
+		libft/ft_strsub.c		\
+		libft/ft_strlen.c		\
+		libft/ft_strdup.c		\
+		libft/ft_atoi.c       \
+		libft/ft_itoa.c
+
 SRCS =	srcs/main.c				\
 		srcs/wolf.c				\
 		srcs/ray.c				\
@@ -28,7 +39,8 @@ SRCS =	srcs/main.c				\
 		srcs/get_map.c			\
 		srcs/fill_one.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS =	$(SRCS:.c=.o)	\
+		$(LIBS:.c=.o)
 
 LIB = -L. libft/libft.a
 

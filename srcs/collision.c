@@ -41,7 +41,7 @@ void	check_walls(t_env *env, t_pt *a, int type)
 	t_ptint b;
 
 	b = convert(a);
-	if (b.x < 0 || b.y < 0
+	if (b.x <= 0 || b.y <= 0
 		|| b.x > env->map.width - 1 || b.y > env->map.height - 1)
 	{
 		if (type < 2)

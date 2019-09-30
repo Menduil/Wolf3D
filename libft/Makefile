@@ -37,8 +37,6 @@ $(NAME): $(OBJ)
 		ar ruc $@ $?
 		ranlib $@
 
-.PHONY: clean fclean re
-
 clean:
 		$(RM) $(OBJ)
 
@@ -46,3 +44,5 @@ fclean: clean
 		$(RM)  $(NAME)
 
 re: fclean all
+
+.PHONY: clean fclean re
