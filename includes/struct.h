@@ -50,7 +50,6 @@ typedef struct		s_map
 
 typedef	struct		s_player
 {
-	int				height;
 	int				xpos;
 	int				ypos;
 	int				alpha;

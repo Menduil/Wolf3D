@@ -6,7 +6,7 @@
 #    By: brey-gal <brey-gal@student.le-101.fr>      +:+   +:    +:    +:+     #
 #                                                  #+#   #+    #+    #+#      #
 #    Created: 2019/08/01 03:24:58 by brey-gal     #+#   ##    ##    #+#       #
-#    Updated: 2019/08/01 03:24:58 by brey-gal    ###    #+. /#+    ###.fr     #
+#    Updated: 2019/10/02 17:36:39 by brey-gal    ###    #+. /#+    ###.fr      #
 #                                                          /                  #
 #                                                         /                   #
 #  ************************************************************************** #
@@ -39,32 +39,57 @@ SRCS =	srcs/main.c				\
 		srcs/get_map.c			\
 		srcs/fill_one.c
 
-OBJS =	$(SRCS:.c=.o)	\
-		$(LIBS:.c=.o)
+OBJS =	$(SRCS:.c=.o)
+
+OBJSLIB = $(LIBS:.c=.o)
 
 LIB = -L. libft/libft.a
 
 INC =	includes/struct.h	\
-		includes/wolf3d.h
+		includes/wolf3d.h	\
+		libft/libft.h
 
 CC = gcc
 
-CFLAGS	+= -g3
+CFLAGS	+= -Wall -Wextra -Werror -O3
 
 SDL2 = -I include -L lib -l SDL2-2.0.0
 
 all : $(NAME)
+	clear
+	@echo "$'\x1b[32m   ▄████████  ▄█        ▄█            ████████▄   ▄██████▄  ███▄▄▄▄      ▄████████    "
+	@echo "$'\x1b[32m  ███    ███ ███       ███            ███   ▀███ ███    ███ ███▀▀▀██▄   ███    ███    "
+	@echo "$'\x1b[32m  ███    ███ ███       ███            ███    ███ ███    ███ ███   ███   ███    █▀     "
+	@echo "$'\x1b[32m  ███    ███ ███       ███            ███    ███ ███    ███ ███   ███  ▄███▄▄▄        "
+	@echo "$'\x1b[32m▀███████████ ███       ███            ███    ███ ███    ███ ███   ███ ▀▀███▀▀▀        "
+	@echo "$'\x1b[32m  ███    ███ ███       ███            ███    ███ ███    ███ ███   ███   ███    █▄     "
+	@echo "$'\x1b[32m  ███    ███ ███▌    ▄ ███▌    ▄      ███   ▄███ ███    ███ ███   ███   ███    ███    "
+	@echo "$'\x1b[32m  ███    █▀  █████▄▄██ █████▄▄██      ████████▀   ▀██████▀   ▀█   █▀    ██████████    "
+	@echo "$'\x1b[32m             ▀         ▀                                                              $'\x1b[0m"
 
-$(NAME) : $(OBJS) $(INC)
-		$(MAKE) -C libft
-		$(CC) -o $(NAME) -O3 $(OBJS) $(LIB) $(SDL2)
+%.o: %.c $(INC)
+		@echo "$'\x1b[31mCompiling :$'\x1b[0m $<$'\x1b[0m"
+	    @$(CC) -c -o $@ $< -I ./includes/struct.h -I ./includes/wolf3d.h -Werror -Wextra -Wall -O3
+
+flags :
+		@echo "$'\x1b[31mFlags :$<$'\x1b[0m $'\x1b[35m$(CFLAGS)$<$'\x1b[0m"
+
+libf : $(OBJSLIB)
+		@ar ruc libft/libft.a $?
+		@ranlib libft/libft.a
+		@echo "$'\x1b[32mLibft.a created$'\x1b[0m"
+
+
+$(NAME) : flags libf $(OBJS) $(INC)
+		@echo "$'\x1b[31mCreating executable :$'\x1b[0m $(NAME)"
+		@$(CC) -o $(NAME) -O3 $(OBJS) $(LIB) $(SDL2)
 
 clean :
-		$(MAKE) clean -C libft
-		rm -f $(OBJS)
+		@echo "$'\x1b[31mCleaning .o$'\x1b[0m"
+		@rm -f $(OBJS) $(OBJSLIB)
 
 fclean : clean
-		$(MAKE) fclean -C libft
-		rm -f $(NAME)
+		@echo "$'\x1b[31mCleaning : $(NAME) & libft.a$'\x1b[0m"
+		@rm -f $(NAME) libft/libft.a
 
 re : fclean all

@@ -45,7 +45,7 @@ void	init(t_env *env)
 	}
 	if ((env->win = SDL_CreateWindow("Wolf3d",
 			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-			1200, 1024, SDL_WINDOW_RESIZABLE)) == NULL)
+			WIDTH, HEIGHT, SDL_WINDOW_RESIZABLE)) == NULL)
 	{
 		SDL_Log("ERREUR : Creation fenetre echouee > %s\n", SDL_GetError());
 		exit(0);

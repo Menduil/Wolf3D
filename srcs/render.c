@@ -69,10 +69,10 @@ void	calc_dist(t_env *env, t_player *p, t_pt *ph, t_pt *pv)
 		distv = 99999;
 	if (disth > distv)
 		draw_slice(env, distv
-		* env->cos_t[abs((int)env->r_angle - p->alpha)], 1, pv);
+		* cos(d_to_r(abs((int)env->r_angle - p->alpha))), 1, pv);
 	else
 		draw_slice(env, disth
-		* env->cos_t[abs((int)env->r_angle - p->alpha)], 0, ph);
+		* cos(d_to_r(abs((int)env->r_angle - p->alpha))), 0, ph);
 }
 
 void	cast_ray(t_env *env, t_player *p)

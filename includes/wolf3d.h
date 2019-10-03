@@ -6,7 +6,7 @@
 /*   By: brey-gal <brey-gal@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/08/01 03:28:19 by brey-gal     #+#   ##    ##    #+#       */
-/*   Updated: 2019/08/01 03:28:19 by brey-gal    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/10/02 18:23:37 by brey-gal    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,7 +23,8 @@
 # define SIZE 64
 # define BUFF_SIZE 5000
 # define PI 3.14159265359
-# define CYAN 0xFFFFFF00
+# define WIDTH 1280
+# define HEIGHT 960
 
 void		wolf(t_env *env);
 void		render(t_env *env, t_player *p);

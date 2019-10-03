@@ -48,12 +48,11 @@ void	texture_load(t_env *env)
 void	setup(t_env *env)
 {
 	env->p.alpha = 164;
-	env->p.height = 52;
 	env->p.speed = 1;
 	env->fov = 60;
 	env->vhit = 0;
-	env->width = 1200;
-	env->height = 1024;
+	env->width = WIDTH;
+	env->height = HEIGHT;
 	env->hhit = 0;
 	env->xmov = 0;
 	env->ymov = 0;

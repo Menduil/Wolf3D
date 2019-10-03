@@ -41,13 +41,6 @@ void	control_next(t_env *env, const Uint8 *keystates)
 	if ((x > 3 || x < -3))
 		env->p.alpha -= x / 10;
 	env->p.alpha = angle_adjust(env->p.alpha);
-	if (env->e.key.keysym.scancode == SDL_SCANCODE_SPACE)
-	{
-		if (SDL_GetRelativeMouseMode() == SDL_TRUE)
-			SDL_SetRelativeMouseMode(SDL_FALSE);
-		else
-			SDL_SetRelativeMouseMode(SDL_TRUE);
-	}
 }
 
 void	control(t_env *env, const Uint8 *keystates)
@@ -70,9 +63,5 @@ void	control(t_env *env, const Uint8 *keystates)
 		env->p.speed = 10;
 	else
 		env->p.speed = 5;
-	if (keystates[SDL_SCANCODE_LCTRL])
-		env->p.height = 32;
-	else
-		env->p.height = 52;
 	control_next(env, keystates);
 }
